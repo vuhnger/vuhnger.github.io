@@ -9,8 +9,8 @@ body{ /* cascading style for body-element */
     background-color: black;
 }
 .box{ /* cascading style for box-element */
-    width: 450px;
-    background: rgba(0,0,0,0.4);
+    width: 800px;
+    background: black;
     padding: 40px;
     text-align: center;
     margin: auto;
@@ -36,22 +36,24 @@ body{ /* cascading style for body-element */
 .box p{ /* cascading style for paragraph-element */
     text-align: justify;
 }
-ul{ /* cascading style for ul-element */
-    border: 1px solid white;
-    margin: 0;
-    padding: 0;
-}
+
 .box li{
-    bordeR: 1px solid white;
+    border: 1px white;
     display: inline-block;
-    margin: 40px;
     list-style: none;
+    width: 50px;
 }
 .box li a{
-    color: rgb(27, 76, 113);
+    color: rgb(255, 255, 255);
     text-decoration: none;
     font-size: 20px;
     transition: all ease-in-out 250ms;
+    width: 20px;
+}
+.ghub-img{
+    width: 30%;
+    display: block;
+    margin: auto;
 }
 .box li a:hover{
     color: #b9b9b9;
