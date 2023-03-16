@@ -6,6 +6,7 @@ body{ /* cascading style for body-element */
     margin: 0;
     padding: 0;
     background-size: cover;
+    background-color: black;
 }
 .box{ /* cascading style for box-element */
     width: 450px;
