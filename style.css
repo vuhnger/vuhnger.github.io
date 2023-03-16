@@ -42,7 +42,7 @@ ul{
     list-style: none;
 }
 .box li a{
-    color: white;
+    color: rgb(39, 87, 123);
     text-decoration: none;
     font-size: 60px;
     transition: all ease-in-out 250ms;
