@@ -1,2 +1,2 @@
-# personalsite
+# vuhnger
 My personal website.
