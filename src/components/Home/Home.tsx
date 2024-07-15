@@ -37,7 +37,7 @@ export default function Home() {
           <div className="timeline-item left">
             <div className="timeline-content">
               <h3>Full Stack utvikler</h3>
-              <p>Universitetet i Oslo, 06.24 - nå</p>
+              <h4>Universitetet i Oslo, 06.24 - nå</h4>
               <p>
                 Utvikler en plattform for oppgaveløsing og monitorering av studenter. Plattformens inngår i et pågående forskningsprosjekt innen læring i informatikkemmner i høyere utdanning. Teamet består av utviklere, designere, dataanalytikere og faglærere. React + TS på frontend og Python, PSQL + Django på backend.
               </p>
@@ -48,9 +48,9 @@ export default function Home() {
           <div className="timeline-item right">
             <div className="timeline-content">
               <h3>Konsulent i studieadministrasjon</h3>
-              <p>
+              <h4>
                 Institutt for informatikk, 01.24 - nå
-              </p>
+              </h4>
               <p>
                 I førstelinjen tar vi imot studenter og gir de studierelatert veiledning og rådgivning. Konsulenter i studieadministrasjonen gjennomfører enklere, rutinepregede saksbehandlingsoppgaver som går igjen og utføres i henhold til forhåndsbestemte instrukser, retningslinjer og prosedyrer.
               </p>
@@ -61,9 +61,9 @@ export default function Home() {
           <div className="timeline-item left">
             <div className="timeline-content">
               <h3>Gruppelærer i universitetsemner</h3>
-              <p>
+              <h4>
               Institutt for informatikk, 08.23 - nå
-              </p>
+              </h4>
               <p>
               Gruppelærere holder seminarundervisningen på instituttet og retter innleveringer. 
               </p>
@@ -84,9 +84,9 @@ export default function Home() {
           <div className="timeline-item right">
             <div className="timeline-content">
               <h3>Frontend utvikler</h3>
-              <p>
+              <h4>
                 Universitetet i Oslo, 06.23 - 08.24
-              </p>
+              </h4>
               <p>
                 Inngikk i et lite team av internasjonale og norske studenter som utviklet et pilotprosjekt til undervisningen i et introduksjonsemne på institutt for informatikk. Vi utviklet en relativt enkel statisk webapplikasjon som tok studentene gjennom pensum på en spillifisert måte. Fikk i etterkant ansvar for oppfølging av studentene som benyttet applikasjonen.
               </p>
@@ -97,7 +97,7 @@ export default function Home() {
           <div className="timeline-item left">
             <div className="timeline-content">
               <h3>Intern (Økonomi)</h3>
-              <p>Navet - bedriftskontakten til institutt for informatikk, 08.23 - nå</p>
+              <h4>Navet - bedriftskontakten til institutt for informatikk, 08.23 - nå</h4>
               <p>
                 Navet er næringslivsutvalget på instituttet og jobber for å sette studenter i kontakt med bedriftene. Økonomigruppen har ansvaret for budsjettering, fakturering og regnskap. Foreningen omsetter for over 1 000 000kr i året.
               </p>
@@ -109,9 +109,9 @@ export default function Home() {
           <div className="timeline-item right">
             <div className="timeline-content">
               <h3>Styreleder</h3>
-              <p>
+              <h4>
                 Linjeforeningen for informatikk: Språkteknologi (LI:ST), 09.22 - 08.24
-              </p>
+              </h4>
               <p>
                 Økonomiansvarlig fra 20222 - 2023.
               </p>

@@ -6,6 +6,8 @@
     --padding: 20px;
     --margin: 50px;
     --navbar-height: 3100px; /* 15.07.24: For å offsette innholdet litt nedover pga navbar, må finne en annen løsning senere.*/
+    --border-color: rgba(135, 206, 235, 0.4); 
+    --border-thickness: 30px;
 }
 
 .home-container {
@@ -24,13 +26,21 @@
 }
 
 .home-image {
-    margin-right: 20px;
+    margin-right: 40px;
 }
 
 .home-image img {
     border-radius: var(--border-radius);
-    height:calc(var(--image-size) * 1.4);
+    height: calc(var(--image-size) * 1.4);
     width: calc(var(--image-size) * 1.1);
+    display: block; /* Ensure there's no extra space below the image */
+    border-top: var(--border-thickness) solid var(--border-color);
+    border-left: var(--border-thickness) solid var(--border-color);
+    border-right: 0;
+    border-bottom: 0;
+    margin-top: calc(-1 * var(--border-thickness));
+    margin-left: calc(-1 * var(--border-thickness));
+    box-shadow: var(--border-thickness) var(--border-thickness) 0 var(--border-color);
 }
 
 .home-text {
