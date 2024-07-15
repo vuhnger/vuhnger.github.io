@@ -1,3 +1,119 @@
-.home{
-    margin :0;
+:root {
+    --image-size: 500px;
+    --primary-color: #333;
+    --secondary-color: #f0f0f0;
+    --border-radius: 20%;
+    --padding: 20px;
+    --margin: 50px;
+    --navbar-height: 700px;
+}
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: var(--margin);
+    padding-top: var(--navbar-height);
+}
+
+.home-content {
+    display: flex;
+    align-items: center;
+    max-width: 800px;
+    margin-bottom: 40px;
+}
+
+.home-image {
+    margin-right: 20px;
+}
+
+.home-image img {
+    border-radius: var(--border-radius);
+    width: var(--image-size) * 0.7;
+    height: var(--image-size);
+}
+
+.home-text {
+    text-align: left;
+}
+
+.home-text h1, .home-text h2 {
+    margin: 0;
+}
+
+.home-text p {
+    margin-top: 10px;
+}
+
+.timeline {
+    position: relative;
+    max-width: 800px;
+    width: 100%;
+    margin: 40px auto;
+    padding: 10px 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: var(--primary-color);
+    transform: translateX(-50%);
+}
+
+.timeline-item {
+    position: relative;
+    width: 50%;
+    padding: 20px 40px;
+    box-sizing: border-box;
+}
+
+.timeline-item.left {
+    left: 0;
+    text-align: right;
+}
+
+.timeline-item.right {
+    left: 50%;
+    text-align: left;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    border: 4px solid var(--secondary-color);
+}
+
+.timeline-item.left::before {
+    left: 100%;
+    transform: translateX(-50%);
+}
+
+.timeline-item.right::before {
+    left: 0px;
+    transform: translateX(-50%);
+}
+
+.timeline-content {
+    background: var(--secondary-color);
+    padding: 20px;
+    border-radius: 6px;
+    position: relative;
+}
+
+.timeline-content h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+.timeline-content p {
+    margin: 5px 0;
 }

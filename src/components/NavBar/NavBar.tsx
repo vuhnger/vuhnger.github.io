@@ -1,10 +1,10 @@
 function NavBar(){
     return (
         <nav className="nav">
-            <a href="/home" className="site-title">vuhnger.dev</a>
+            <a href="/home" className="site-title">Victor R. Uhnger</a>
             <ul>
                 <li>
-                    <a href="/dashboard">Dashboard</a>
+                    <a href="/about">Kontakt meg</a>
                 </li>
                 <li>
                     <a href="/projects">Prosjekter</a>
