@@ -18,7 +18,7 @@ export default function Home() {
             <p>23 år gammel fra Oslo på 3. året bachelor.</p>
             
             <p>
-              Gjennom internships, jobber, studier og verv har jeg opparbeidet kompetanse innen systemutvikling, både på frontend og backend.
+              Gjennom internships og jobber, studier og verv har jeg opparbeidet kompetanse innen systemutvikling, både på frontend og backend.
             </p>
 
             <p>
