@@ -14,9 +14,21 @@ export default function Home() {
           <div className="home-text">
             <h1>Victor Uhnger</h1>
             <h2>Utvikler og informatikkstudent</h2>
+            
+            <p>23 år gammel fra Oslo på 3. året bachelor.</p>
+            
             <p>
-              Engasjert og selvdreven informatikkstudent fra Universitetet i Oslo som trives i konstant endrende arbeidsmiljøer med kompliserte arbeidsoppgaver. Naturlig leder som motiveres av læring og resultater. 
+              Gjennom internships, jobber, studier og verv har jeg opparbeidet kompetanse innen systemutvikling, både på frontend og backend.
             </p>
+
+            <p>
+              Av personlige kvaliteter er jeg rik på engasjement, interessedrevet og trives i miljøer med store utfordringer og høyt tempo. Spiller på lag og trives både i lederrollen og med teknisk arbeid.
+            </p>
+
+            <p>
+              Informatikk interesserer meg fordi det er en tydelig sammenheng mellom å løse isolerte, komplekse tekniske problemer og å se en synlig og målbar påvirkning på samfunnet.
+            </p>
+
           </div>
         </div>
 

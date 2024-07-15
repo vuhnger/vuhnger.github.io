@@ -5,12 +5,14 @@
     --border-radius: 8px;
     --padding: 20px;
     --margin: 20px;
+    --navbar-offset: 100px; /* Se 6a3f757210f2c6fe13ff4f41f04aba2b50631714*/
 }
 
 .projects-container {
     max-width: 800px;
     margin: auto;
     padding: var(--padding);
+    margin-top: var(--navbar-offset);
 }
 
 .project-item {
