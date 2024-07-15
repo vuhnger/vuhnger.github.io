@@ -1,12 +1,12 @@
 :root {
     --image-size: 700px;
-    --primary-color: #333;
-    --secondary-color: #f0f0f0;
+    --primary-color: #232136;
+    --secondary-color: #faf4ed;
     --border-radius: 20%;
     --padding: 20px;
     --margin: 50px;
     --navbar-height: 3100px; /* 15.07.24: For å offsette innholdet litt nedover pga navbar, må finne en annen løsning senere.*/
-    --border-color: rgba(135, 206, 235, 0.4); 
+    --border-color: rgba(156, 207, 216, 0.7); 
     --border-thickness: 30px;
 }
 
@@ -23,6 +23,7 @@
     align-items: center;
     max-width: 800px;
     margin-bottom: 40px;
+    background-color: var(--secondary-color);
 }
 
 .home-image {
@@ -45,6 +46,7 @@
 
 .home-text {
     text-align: left;
+    color: var(--primary-color);
 }
 
 .home-text h1, .home-text h2 {
@@ -125,6 +127,12 @@
     color: var(--primary-color);
 }
 
+.timeline-content h4 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
 .timeline-content p {
     margin: 5px 0;
+    color: var(--primary-color);
 }

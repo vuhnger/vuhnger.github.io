@@ -26,3 +26,7 @@
     margin-right: 8px;
     vertical-align: middle;
 }
+
+.about-container h1{
+    color: var(--primary-color);
+}

@@ -2,7 +2,7 @@ import './About.css'
 
 function About(){
     return (
-        <div>
+        <div className="about-container">
             <h1>Kontakt meg</h1>
             <section className="Links">
                 <a href="https://www.linkedin.com/in/victoruhnger/" target="_blank" rel="roreferrer">
