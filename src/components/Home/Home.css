@@ -1,11 +1,11 @@
 :root {
-    --image-size: 500px;
+    --image-size: 700px;
     --primary-color: #333;
     --secondary-color: #f0f0f0;
     --border-radius: 20%;
     --padding: 20px;
     --margin: 50px;
-    --navbar-height: 700px;
+    --navbar-height: 3100px; /* 15.07.24: For å offsette innholdet litt nedover pga navbar, må finne en annen løsning senere.*/
 }
 
 .home-container {
@@ -29,8 +29,8 @@
 
 .home-image img {
     border-radius: var(--border-radius);
-    width: var(--image-size) * 0.7;
-    height: var(--image-size);
+    height:calc(var(--image-size) * 1.4);
+    width: calc(var(--image-size) * 1.1);
 }
 
 .home-text {
@@ -51,6 +51,7 @@
     width: 100%;
     margin: 40px auto;
     padding: 10px 0;
+    z-index: -1;
 }
 
 .timeline::before {
@@ -73,7 +74,7 @@
 
 .timeline-item.left {
     left: 0;
-    text-align: right;
+    text-align: left;
 }
 
 .timeline-item.right {

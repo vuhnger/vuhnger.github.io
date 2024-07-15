@@ -1,3 +1,51 @@
-.projects{
+:root {
+    --image-size: 300px;
+    --primary-color: #333;
+    --secondary-color: #f0f0f0;
+    --border-radius: 8px;
+    --padding: 20px;
+    --margin: 20px;
+}
+
+.projects-container {
+    max-width: 800px;
+    margin: auto;
+    padding: var(--padding);
+}
+
+.project-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--margin);
+    padding: var(--padding);
+    background-color: var(--secondary-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.project-image {
+    flex: 0 0 var(--image-size);
+    margin-right: var(--margin);
+}
+
+.project-image img {
+    width: var(--image-size);
+    height: var(--image-size);
+    border-radius: var(--border-radius);
+    object-fit: cover;
+}
+
+.project-text {
+    flex: 1;
+    text-align: left;
+}
+
+.project-text h2 {
+    margin: 0 0 10px 0;
+    color: var(--primary-color);
+}
+
+.project-text p {
     margin: 0;
+    color: var(--primary-color);
 }

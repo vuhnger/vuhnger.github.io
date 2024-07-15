@@ -1,16 +1,21 @@
+:root{
+  --primary-color: #333;
+  --secondary-color: #f0f0f0;
+}
+
 .nav {
     width: auto;
     position: fixed;
     top: 0px;
     height: 100px;
-    background-color: #6e6a86;
-    color: white;
+    background-color: transparent;
+    color: var(--primary-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 2rem;
     padding: 0 1rem;
-    border-bottom: 1px solid #222;
+    border-bottom: 0px solid #222;
     left: 0;
     right: 0;
   }
