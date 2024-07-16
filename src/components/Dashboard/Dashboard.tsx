@@ -11,7 +11,7 @@ const links: {
     "https://for-ansatte.uio.no/employee/index.html" : "Ansatt UiO",
     "https://minestudier.uio.no/nb/student/index.html" : "Mine studier",
     "https://ifirom.no" : "Ifi-rom",
-    "https://www.sio.no/mat-og-drikke/spisesteder/Ole-Johan-spiseri" : "Kantina"
+    "https://login.dfo.no/?idp=feide&service=selvbetjeningsportal" : "DFO"
 } 
 
 export default function Dashboard(){
