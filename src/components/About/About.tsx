@@ -14,6 +14,9 @@ function About(){
                 <a href="https://github.com/vuhnger" target="_blank" rel="roreferrer">
                 GitHub
                 </a>
+                <a href="mailto:victor.uhnger@gmail.com">
+                Privat e-post
+                </a>
             </section>
         </div>
     );
