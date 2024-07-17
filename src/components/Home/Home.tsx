@@ -52,7 +52,7 @@ export default function Home() {
                 Institutt for informatikk, 01.24 - nå
               </h4>
               <p>
-                I førstelinjen tar vi imot studenter og gir de studierelatert veiledning og rådgivning. Konsulenter i studieadministrasjonen gjennomfører enklere, rutinepregede saksbehandlingsoppgaver som går igjen og utføres i henhold til forhåndsbestemte instrukser, retningslinjer og prosedyrer.
+                Jobber i studieadministrasjonen sin førstelinje. Vi imot studenter og gir de studierelatert veiledning og rådgivning. Arbeidsoppgavene innebærer enklere saksbehandling og forefallende administrativt arbeid.
               </p>
             </div>
           </div>
@@ -124,6 +124,9 @@ export default function Home() {
           </div>
 
         </div>
+        <footer>
+        &copy; 2024 Victor Rørslett Uhnger. All rights reserved.
+        </footer>
       </div>
     );
 }
