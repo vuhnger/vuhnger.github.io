@@ -10,6 +10,10 @@
     --border-thickness: 30px;
 }
 
+footer{
+    color: var(--primary-color);
+}
+
 .home-container {
     display: flex;
     flex-direction: column;
