@@ -15,7 +15,7 @@ export default function Home() {
             <h1>Victor Uhnger</h1>
             <h2>Utvikler og informatikkstudent</h2>
             
-            <p>23 år gammel, fra Oslo, studerer programmering og systemarkitektur på 3. året bachelor.</p>
+            <p>23 år gammel, fra Oslo, studerer informatikk og programmering på 3. året bachelor.</p>
             
             <p>
               Gjennom internships og jobber, studier og verv har jeg opparbeidet kompetanse innen teamarbeidsystemutvikling, både på frontend og backend. Trives med å lære nye ting!
