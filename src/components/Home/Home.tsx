@@ -15,18 +15,18 @@ export default function Home() {
             <h1>Victor Uhnger</h1>
             <h2>Utvikler og informatikkstudent</h2>
             
-            <p>23 år gammel fra Oslo på 3. året bachelor.</p>
+            <p>23 år gammel, fra Oslo, studerer programmering og systemarkitektur på 3. året bachelor.</p>
             
             <p>
-              Gjennom internships og jobber, studier og verv har jeg opparbeidet kompetanse innen systemutvikling, både på frontend og backend.
+              Gjennom internships og jobber, studier og verv har jeg opparbeidet kompetanse innen teamarbeidsystemutvikling, både på frontend og backend. Trives med å lære nye ting!
             </p>
 
             <p>
-              Av personlige kvaliteter er jeg rik på engasjement, interessedrevet og trives i miljøer med store utfordringer og høyt tempo. Spiller på lag og trives både i lederrollen og med teknisk arbeid.
+              Rik på engasjement, interessedrevet og trives i miljøer med store utfordringer og høyt tempo. Spiller på lag og trives både i lederrollen og med teknisk arbeid.
             </p>
 
             <p>
-              Informatikk interesserer meg fordi det er en tydelig sammenheng mellom å løse isolerte, komplekse tekniske problemer og å se en synlig og målbar påvirkning på samfunnet.
+              Informatikk interesserer meg fordi det er en tydelig sammenheng mellom å løse isolerte, komplekse, tekniske problemer og å se en målbar påvirkning på samfunnet.
             </p>
 
           </div>
@@ -39,7 +39,7 @@ export default function Home() {
               <h3>Full Stack utvikler</h3>
               <h4>Universitetet i Oslo, 06.24 - nå</h4>
               <p>
-                Utvikler en plattform for oppgaveløsing og monitorering av studenter. Plattformens inngår i et pågående forskningsprosjekt innen læring i informatikkemmner i høyere utdanning. Teamet består av utviklere, designere, dataanalytikere og faglærere. React + TS på frontend og Python, PSQL + Django på backend.
+                Utvikler en plattform for oppgaveløsing og monitorering av studenters progresjon. Plattformens inngår i et pågående forskningsprosjekt innen læring i informatikkemmner i høyere utdanning. Teamet består av utviklere, designere, dataanalytikere og faglærere. React + TS på frontend og Python, PostgresQL + Django på backend, Docker + Kubernetes for utviklingsmiljø og produksjonssetting.
               </p>
             </div>
           </div>
@@ -52,7 +52,7 @@ export default function Home() {
                 Institutt for informatikk, 01.24 - nå
               </h4>
               <p>
-                Jobber i studieadministrasjonen sin førstelinje. Vi imot studenter og gir de studierelatert veiledning og rådgivning. Arbeidsoppgavene innebærer enklere saksbehandling og forefallende administrativt arbeid.
+                Jobber i studieadministrasjonen sin førstelinje. Vi imot studenter og gir de studierelatert veiledning. Arbeidsoppgavene innebærer saksbehandling og forefallende studieadministrativt arbeid. Stillingen stiller særskilte krav til integritet og selvstendighet.
               </p>
             </div>
           </div>
@@ -75,7 +75,7 @@ export default function Home() {
 
               <h4>IN1020 - Introduksjon til datateknologi</h4>
               <p>
-                Hatt gruppelærerstilling i emnet både 2023 og 2024. I 2023 hadde jeg og en annen student ansvar for oppfølging av et alternativt utdanningsløp for omtrent 70 studenter. Holdt faglige seminarer med en spillifisert variant av undervisningen og fulgte opp gruppene med studenter gjennom semesteret med veiledning og faglige tilbakemeldinger.
+                Hatt gruppelærerstilling i emnet både 2023 og 2024. I 2023 hadde jeg og en annen student ansvaret for oppfølging av et alternativt utdanningsløp for omtrent 70 studenter. Holdt faglige seminarer med en spillifisert variant av undervisningen og fulgte opp gruppene med studenter gjennom semesteret med veiledning og faglige tilbakemeldinger. I 2024 administrerer jeg innleveringssystemet og hjelper gruppelærerteamet med å holde undervisningen sin.
               </p>
             </div>
           </div>
@@ -88,7 +88,7 @@ export default function Home() {
                 Universitetet i Oslo, 06.23 - 08.24
               </h4>
               <p>
-                Inngikk i et lite team av internasjonale og norske studenter som utviklet et pilotprosjekt til undervisningen i et introduksjonsemne på institutt for informatikk. Vi utviklet en relativt enkel statisk webapplikasjon som tok studentene gjennom pensum på en spillifisert måte. Fikk i etterkant ansvar for oppfølging av studentene som benyttet applikasjonen.
+                Inngikk i et lite team av internasjonale og norske studenter som utviklet et pilotprosjekt til undervisningen i et introduksjonsemne på institutt for informatikk. Vi utviklet en relativt enkel statisk webapplikasjon som tok studentene gjennom pensum på en spillifisert måte. Arbeidet var både vitenskapelig og teknisk, vi utviklet både evalueringsmetoder og selve oppgavene studentene gjennomførte, samt plattformen de skulle løse oppgavenee på. Fikk i etterkant ansvar for oppfølging av studentene som benyttet applikasjonen.
               </p>
             </div>
           </div>
@@ -99,7 +99,7 @@ export default function Home() {
               <h3>Intern (Økonomi)</h3>
               <h4>Navet - bedriftskontakten til institutt for informatikk, 08.23 - nå</h4>
               <p>
-                Navet er næringslivsutvalget på instituttet og jobber for å sette studenter i kontakt med bedriftene. Økonomigruppen har ansvaret for budsjettering, fakturering og regnskap. Foreningen omsetter for over 1 000 000kr i året.
+                Navet er næringslivsutvalget på instituttet og jobber for å sette studenter i kontakt med bedriftene. Økonomigruppen har ansvaret for budsjettering, fakturering og regnskap. Foreningen omsetter for rundt 1 000 000kr i året, som medfører høye krav til nøyaktighet i den økonomiske driften.
               </p>
               <a href="https://ifinavet.no/for-bedrifter/" target="_blank" rel="noreferrer">Om Navet</a>
             </div>
@@ -110,14 +110,14 @@ export default function Home() {
             <div className="timeline-content">
               <h3>Styreleder</h3>
               <h4>
-                Linjeforeningen for informatikk: Språkteknologi (LI:ST), 09.22 - 08.24
+                Linjeforeningen for informatikk: Språkteknologi [LI:ST], 09.22 - 08.24
               </h4>
               <p>
                 Økonomiansvarlig fra 20222 - 2023.
               </p>
               <p>Styreleder fra 2023 - 2024</p>
               <p>
-                I min tid i styret til en av linjeforeningene på instituttet har jeg jobbet for å skape faglig engasjement og trivsel gjennom å arrangere faglige og sosiale arrangementer for studentene. Styret består av 10 studenter som jeg ledet i en periode på ett år.
+                I min tid i styret til en av linjeforeningene på instituttet har jeg jobbet for å skape faglig engasjement og trivsel gjennom å arrangere faglige og sosiale arrangementer for studentene. Styret består av 10 studenter som jeg ledet i en periode på ett år. Studentforeningen har hatt mange vellykkede faglige og sosiale arrangementer under min ledelse og fortsetter å skape engasjement hos studentene vi jobber for den dag i dag.
               </p>
               <a href="https://www.mn.uio.no/ifi/livet-rundt-studiene/organisasjoner/list.html" target="_blank" rel="noreferrer">Om LI:ST</a>
             </div>
