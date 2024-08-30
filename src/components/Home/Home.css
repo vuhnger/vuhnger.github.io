@@ -5,7 +5,7 @@
     --border-radius: 20%;
     --padding: 20px;
     --margin: 50px;
-    --navbar-height: 3100px; /* 15.07.24: For å offsette innholdet litt nedover pga navbar, må finne en annen løsning senere.*/
+    --navbar-height: 3800px; /* 15.07.24: For å offsette innholdet litt nedover pga navbar, må finne en annen løsning senere.*/
     --border-color: rgba(156, 207, 216, 0.7); 
     --border-thickness: 30px;
 }
