@@ -5,14 +5,20 @@
     --border-radius: 8px;
     --padding: 20px;
     --margin: 20px;
-    --navbar-offset: 100px; /* Se 6a3f757210f2c6fe13ff4f41f04aba2b50631714*/
 }
 
 .projects-container {
     max-width: 800px;
-    margin: auto;
-    padding: var(--padding);
-    margin-top: var(--navbar-offset);
+    position: absolute;
+    top: 100px; 
+    left: 50%;
+    transform: translateX(-50%);
+    margin: var(--margin);
+    width: calc(100% - 2 * var(--margin));
+    box-sizing: border-box; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .projects-container h1 {
