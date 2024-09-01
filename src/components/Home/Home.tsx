@@ -18,15 +18,15 @@ export default function Home() {
             <p>23 år gammel, fra Oslo, studerer informatikk og programmering på 3. året bachelor.</p>
             
             <p>
-              Gjennom internships og jobber, studier og verv har jeg opparbeidet kompetanse innen teamarbeidsystemutvikling, både på frontend og backend. Trives med å lære nye ting!
+              Hva er vel bedre enn et problem?
             </p>
 
             <p>
-              Rik på engasjement, interessedrevet og trives i miljøer med store utfordringer og høyt tempo. Spiller på lag og trives både i lederrollen og med teknisk arbeid.
+              En løsning, mener da jeg.
             </p>
 
             <p>
-              Informatikk interesserer meg fordi det er en tydelig sammenheng mellom å løse isolerte, komplekse, tekniske problemer og å se en målbar påvirkning på samfunnet.
+              Her kan du lese litt om hva jeg har holdt på med de siste årene.
             </p>
 
           </div>

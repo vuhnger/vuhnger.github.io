@@ -5,26 +5,26 @@
     --border-radius: 20%;
     --padding: 20px;
     --margin: 50px;
-    --navbar-height: 3800px; /* 15.07.24: For å offsette innholdet litt nedover pga navbar, må finne en annen løsning senere.*/
     --border-color: rgba(156, 207, 216, 0.7); 
     --border-thickness: 30px;
 }
 
-footer{
-    color: var(--primary-color);
-}
-
 .home-container {
+    position: absolute;
+    top: 100px; 
+    left: 50%;
+    transform: translateX(-50%);
+    margin: var(--margin);
+    max-width: 1200px;
+    width: calc(100% - 2 * var(--margin));
+    box-sizing: border-box; 
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: var(--margin);
-    padding-top: var(--navbar-height);
 }
 
 .home-content {
     display: flex;
-    align-items: center;
     max-width: 800px;
     margin-bottom: 40px;
 }
@@ -37,7 +37,6 @@ footer{
     border-radius: var(--border-radius);
     height: calc(var(--image-size) * 1.4);
     width: calc(var(--image-size) * 1.1);
-    display: block; /* Ensure there's no extra space below the image */
     border-top: var(--border-thickness) solid var(--border-color);
     border-left: var(--border-thickness) solid var(--border-color);
     border-right: 0;
