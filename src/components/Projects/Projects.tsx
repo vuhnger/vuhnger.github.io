@@ -36,7 +36,8 @@ export default function Projects() {
                 <div className="project-text">
                     <h2>Læringsplattform for studenter</h2>
                     <p>
-                    Utvikler en plattform for oppgaveløsing og monitorering av studenter. Plattformens inngår i et pågående forskningsprosjekt innen læring i informatikkemmner i høyere utdanning. Teamet består av utviklere, designere, dataanalytikere og faglærere. React + TS på frontend og Python, PSQL + Django på backend.
+                    Utviklet en plattform for oppgaveløsing og monitorering av studenter. Plattformens inngår i et pågående forskningsprosjekt innen læring i informatikkemmner i høyere utdanning. Teamet består av utviklere, designere, dataanalytikere og faglærere. React + TS på frontend og Python, PSQL + Django på backend.
+                    Arbeidet pågikk sommeren 2023 og 2024.
                     </p>
                     <h2>Teknologier</h2>
                     <ul>
