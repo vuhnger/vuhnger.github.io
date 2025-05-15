@@ -11,16 +11,14 @@ const links: {
     "https://for-ansatte.uio.no/employee/index.html" : "Ansatt UiO",
     "https://minestudier.uio.no/nb/student/index.html" : "Mine studier",
     "https://ifirom.no" : "Ifi-rom",
-    "https://login.dfo.no/?idp=feide&service=selvbetjeningsportal" : "DFO"
+    "https://www.sio.no/mat-og-drikke/spisesteder/Ole-Johan-spiseri" : "Kantina"
 } 
 
 export default function Dashboard(){
     return (
         <div className="dashboard">
             {
-                Object
-                .entries(links)
-                .map(
+                Object.entries(links).map(
                     ([link, keyword], index) => (
                         <Box key={index} link={link} keyword={keyword} />
                     )
