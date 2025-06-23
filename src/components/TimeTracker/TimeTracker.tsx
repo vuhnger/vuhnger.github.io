@@ -17,6 +17,11 @@ export default function TimeTracker() {
   const [startTime, setStartTime] = useState(32); // 8:00 AM default
   const [endTime, setEndTime] = useState(68); // 5:00 PM default
   const [isDragging, setIsDragging] = useState<{ wheel: 'start' | 'end', initialY: number, initialValue: number } | null>(null);
+  const [focusedWheel, setFocusedWheel] = useState<'start' | 'end' | null>(null);
+  
+  // For scroll sensitivity control
+  const lastScrollTime = useRef<Record<'start' | 'end', number>>({ start: 0, end: 0 });
+  const scrollThreshold = useRef<Record<'start' | 'end', number>>({ start: 0, end: 0 });
   
   const startWheelRef = useRef<HTMLDivElement>(null);
   const endWheelRef = useRef<HTMLDivElement>(null);
@@ -41,9 +46,36 @@ export default function TimeTracker() {
   const { hours, minutes } = calculateHours();
   const totalHours = `${hours}:${minutes.toString().padStart(2, '0')}`;
 
-  // Handle wheel rotation
-  const handleWheelScroll = (wheel: 'start' | 'end', direction: 'up' | 'down') => {
+  // Handle wheel rotation with reduced sensitivity
+  const handleWheelScroll = (wheel: 'start' | 'end', e: React.WheelEvent) => {
+    e.preventDefault(); // Prevent page scrolling
+    
+    const now = Date.now();
+    const timeSinceLastScroll = now - lastScrollTime.current[wheel];
+    
+    // Accumulate scroll delta
+    scrollThreshold.current[wheel] += Math.abs(e.deltaY);
+    
+    // Debounce: Only allow changes every 150ms
+    if (timeSinceLastScroll < 150) {
+      return;
+    }
+    
+    // Require a minimum threshold of wheel movement
+    if (scrollThreshold.current[wheel] < 50) {
+      return;
+    }
+    
+    // Reset threshold
+    scrollThreshold.current[wheel] = 0;
+    
+    // Update last scroll time
+    lastScrollTime.current[wheel] = now;
+    
+    // Determine direction
+    const direction = e.deltaY > 0 ? 'down' : 'up';
     const increment = direction === 'up' ? 1 : -1;
+    
     if (wheel === 'start') {
       const newValue = (startTime + increment + TIME_INTERVALS.length) % TIME_INTERVALS.length;
       setStartTime(newValue);
@@ -53,13 +85,48 @@ export default function TimeTracker() {
     }
   };
 
+  // Handle keyboard events for arrow up/down
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!focusedWheel) return;
+      
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        const increment = 1;
+        if (focusedWheel === 'start') {
+          const newValue = (startTime + increment + TIME_INTERVALS.length) % TIME_INTERVALS.length;
+          setStartTime(newValue);
+        } else {
+          const newValue = (endTime + increment + TIME_INTERVALS.length) % TIME_INTERVALS.length;
+          setEndTime(newValue);
+        }
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        const increment = -1;
+        if (focusedWheel === 'start') {
+          const newValue = (startTime + increment + TIME_INTERVALS.length) % TIME_INTERVALS.length;
+          setStartTime(newValue);
+        } else {
+          const newValue = (endTime + increment + TIME_INTERVALS.length) % TIME_INTERVALS.length;
+          setEndTime(newValue);
+        }
+      }
+    };
+    
+    document.addEventListener('keydown', handleKeyDown);
+    
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [focusedWheel, startTime, endTime]);
+
   // Handle mouse/touch events for dragging
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!isDragging) return;
       
       const deltaY = e.clientY - isDragging.initialY;
-      const sensitivity = 10; // Pixels per step
+      const sensitivity = 20; // Reduced sensitivity (was 10)
       const steps = Math.round(deltaY / sensitivity);
       
       if (steps !== 0) {
@@ -133,11 +200,17 @@ export default function TimeTracker() {
           <div className="time-wheel-container">
             <h3>Kom på jobb</h3>
             <div 
-              className="time-wheel"
+              className={`time-wheel ${focusedWheel === 'start' ? 'focused' : ''}`}
               ref={startWheelRef}
-              onWheel={(e) => handleWheelScroll('start', e.deltaY > 0 ? 'down' : 'up')}
+              onWheel={(e) => handleWheelScroll('start', e)}
               onMouseDown={(e) => setIsDragging({ wheel: 'start', initialY: e.clientY, initialValue: startTime })}
               onTouchStart={(e) => setIsDragging({ wheel: 'start', initialY: e.touches[0].clientY, initialValue: startTime })}
+              onFocus={() => setFocusedWheel('start')}
+              onBlur={() => setFocusedWheel(null)}
+              tabIndex={0}
+              role="slider"
+              aria-label="Kom på jobb tid"
+              aria-valuetext={TIME_INTERVALS[startTime].label}
             >
               <div className="wheel-overlay"></div>
               {renderWheelOptions(startTime)}
@@ -147,11 +220,17 @@ export default function TimeTracker() {
           <div className="time-wheel-container">
             <h3>Dro fra jobb</h3>
             <div 
-              className="time-wheel"
+              className={`time-wheel ${focusedWheel === 'end' ? 'focused' : ''}`}
               ref={endWheelRef}
-              onWheel={(e) => handleWheelScroll('end', e.deltaY > 0 ? 'down' : 'up')}
+              onWheel={(e) => handleWheelScroll('end', e)}
               onMouseDown={(e) => setIsDragging({ wheel: 'end', initialY: e.clientY, initialValue: endTime })}
               onTouchStart={(e) => setIsDragging({ wheel: 'end', initialY: e.touches[0].clientY, initialValue: endTime })}
+              onFocus={() => setFocusedWheel('end')}
+              onBlur={() => setFocusedWheel(null)}
+              tabIndex={0}
+              role="slider"
+              aria-label="Dro fra jobb tid"
+              aria-valuetext={TIME_INTERVALS[endTime].label}
             >
               <div className="wheel-overlay"></div>
               {renderWheelOptions(endTime)}
@@ -164,6 +243,10 @@ export default function TimeTracker() {
           <div className="total-hours">{totalHours}</div>
           <div className="lunch-note">- 30min lunsj</div>
         </div>
+      </div>
+      
+      <div className="instruction-text">
+        <p>Bruk piltaster ↑/↓ eller mushjul for å justere tidene</p>
       </div>
     </div>
   );
