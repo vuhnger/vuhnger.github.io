@@ -43,8 +43,14 @@ export default function TimeTracker() {
     return { hours, minutes };
   };
 
-  const { hours, minutes } = calculateHours();
-  const totalHours = `${hours}:${minutes.toString().padStart(2, '0')}`;
+    const { hours, minutes } = calculateHours();
+    const rawDecimal = hours + minutes / 60;
+
+    // Rund til nærmeste kvarter
+    const rounded = Math.round(rawDecimal * 4) / 4;
+
+    // Fjern .0 hvis det er et helt tall
+    const totalHours = `${Number.isInteger(rounded) ? rounded.toFixed(0) : rounded} t`;
 
   // Handle wheel rotation with reduced sensitivity
   const handleWheelScroll = (wheel: 'start' | 'end', e: React.WheelEvent) => {
@@ -126,7 +132,7 @@ export default function TimeTracker() {
       if (!isDragging) return;
       
       const deltaY = e.clientY - isDragging.initialY;
-      const sensitivity = 20; // Reduced sensitivity (was 10)
+      const sensitivity = 30; // Reduced sensitivity (was 10)
       const steps = Math.round(deltaY / sensitivity);
       
       if (steps !== 0) {
@@ -239,7 +245,7 @@ export default function TimeTracker() {
         </div>
         
         <div className="result-container">
-          <h2>Du jobbet timer:</h2>
+          <h2>Du jobbet:</h2>
           <div className="total-hours">{totalHours}</div>
           <div className="lunch-note">- 30min lunsj</div>
         </div>
@@ -247,6 +253,87 @@ export default function TimeTracker() {
       
       <div className="instruction-text">
         <p>Bruk piltaster ↑/↓ eller mushjul for å justere tidene</p>
+      </div>
+
+      <WorkTimeReverseCalculator/>
+    </div>
+  );
+}
+
+function WorkTimeReverseCalculator() {
+  const [mode, setMode] = useState<'start' | 'end'>('start');
+  const [selectedTime, setSelectedTime] = useState(32); // 08:00
+  const [workHours, setWorkHours] = useState(7.5); // f.eks. 7.5 timer
+
+  const calculateOtherTime = () => {
+    const totalMinutes = Math.round(workHours * 60 + LUNCH_BREAK);
+
+    const minutes = Math.floor(selectedTime / 4) * 60 + (selectedTime % 4) * 15;
+    let resultMinutes = mode === 'start' ? minutes + totalMinutes : minutes - totalMinutes;
+    if (resultMinutes < 0) resultMinutes += 24 * 60;
+    resultMinutes %= 24 * 60;
+
+    const hours = Math.floor(resultMinutes / 60);
+    const mins = resultMinutes % 60;
+    return `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}`;
+  };
+
+  return (
+    <div className="reverse-calculator">
+      <h2>Jobbtid-kalkulator</h2>
+
+      <div className="mode-selector">
+        <label>
+          <input
+            type="radio"
+            value="start"
+            checked={mode === 'start'}
+            onChange={() => setMode('start')}
+          />
+          Jeg vet når jeg begynner
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="end"
+            checked={mode === 'end'}
+            onChange={() => setMode('end')}
+          />
+          Jeg vet når jeg slutter
+        </label>
+      </div>
+
+      <div className="time-picker">
+        <label>
+          {mode === 'start' ? 'Starttid' : 'Sluttid'}:
+          <select
+            value={selectedTime}
+            onChange={(e) => setSelectedTime(Number(e.target.value))}
+          >
+            {TIME_INTERVALS.map(({ value, label }) => (
+              <option key={value} value={value}>{label}</option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      <div className="work-hours-input">
+        <label>
+          Hvor mange timer skal du jobbe (inkl. 30 min lunsj)?
+          <input
+            type="number"
+            step="0.25"
+            min="0"
+            value={workHours}
+            onChange={(e) => setWorkHours(parseFloat(e.target.value))}
+          />
+        </label>
+      </div>
+
+      <div className="result-display">
+        <strong>
+          {mode === 'start' ? 'Du må gå kl' : 'Du må møte kl'}: {calculateOtherTime()}
+        </strong>
       </div>
     </div>
   );

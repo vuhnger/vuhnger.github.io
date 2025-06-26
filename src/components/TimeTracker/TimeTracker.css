@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   padding: 40px 20px;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
   margin-top: 50px;
   color: var(--primary-color, #232136);
@@ -15,13 +15,21 @@
 
 .calculator-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
   background-color: var(--secondary-color, #faf4ed);
   padding: 30px;
   border-radius: 20px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   width: 100%;
+  flex-wrap: wrap;
+}
+
+.main-calculator {
+  flex: 1;
+  min-width: 300px;
 }
 
 .time-wheels {
@@ -93,12 +101,11 @@
 }
 
 .time-option.active {
-  color: #e6b450; /* Yellow accent color */
+  color: #e6b450;
   font-size: 1.6rem;
   font-weight: 700;
 }
 
-/* Horizontal divider for the active selection */
 .time-wheel::before,
 .time-wheel::after {
   content: '';
@@ -106,7 +113,7 @@
   left: 10%;
   right: 10%;
   height: 2px;
-  background-color: #e6b450; /* Yellow accent color */
+  background-color: #e6b450;
   z-index: 3;
 }
 
@@ -134,20 +141,75 @@
 .total-hours {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #e6b450; /* Yellow accent color */
+  color: #e6b450;
   padding: 10px 30px;
-  background-color: #232136; /* Your primary color */
+  background-color: #232136;
   border-radius: 15px;
 }
 
-/* Make it responsive */
-@media (max-width: 600px) {
-  .time-wheels {
+.instruction-text {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* New component: WorkTimeReverseCalculator */
+.reverse-calculator {
+  flex: 1;
+  min-width: 300px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 15px;
+  border: 2px dashed #e6b450;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.reverse-calculator h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.mode-selector label {
+  margin-right: 20px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.time-picker,
+.work-hours-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.time-picker select,
+.work-hours-input input {
+  padding: 5px 10px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.result-display {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #232136;
+}
+
+/* Responsive tweaks */
+@media (max-width: 900px) {
+  .calculator-container {
     flex-direction: column;
-    gap: 30px;
+    align-items: stretch;
   }
   
-  .time-wheel-container {
-    width: 200px;
+  .time-wheels {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main-calculator,
+  .reverse-calculator {
+    width: 100%;
   }
 }
