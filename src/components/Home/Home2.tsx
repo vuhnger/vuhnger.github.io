@@ -1,15 +1,13 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import myImg from "../../Assets/avatar.svg";
+import myImg from "../../Assets/avatar.png";
 import Tilt from "react-parallax-tilt";
 import {
   AiFillGithub,
-  AiOutlineTwitter,
-  AiFillInstagram,
 } from "react-icons/ai";
-import { FaLinkedinIn } from "react-icons/fa";
+import { FaLinkedinIn, FaStrava } from "react-icons/fa";
 
-function Home2() {
+const Home2: React.FC = () => {
   return (
     <Container fluid className="home-about-section" id="about">
       <Container>
@@ -19,37 +17,34 @@ function Home2() {
               LET ME <span className="purple"> INTRODUCE </span> MYSELF
             </h1>
             <p className="home-about-body">
-              I fell in love with programming and I have at least learnt
-              something, I think… 🤷‍♂️
+              I'm a 23-year-old computer science student from Oslo, currently in my 3rd year of bachelor studies.
               <br />
-              <br />I am fluent in classics like
+              <br />I'm passionate about
               <i>
-                <b className="purple"> C++, Javascript and Go. </b>
+                <b className="purple"> React, TypeScript, and Python. </b>
               </i>
               <br />
               <br />
-              My field of Interest's are building new &nbsp;
+              My field of interests include building modern &nbsp;
               <i>
-                <b className="purple">Web Technologies and Products </b> and
-                also in areas related to{" "}
+                <b className="purple">web applications </b> and working on projects that involve{" "}
                 <b className="purple">
-                  Blockchain.
+                  full-stack development.
                 </b>
               </i>
               <br />
               <br />
-              Whenever possible, I also apply my passion for developing products
-              with <b className="purple">Node.js</b> and
+              I have experience with <b className="purple">React + TypeScript</b> on the frontend and
               <i>
                 <b className="purple">
                   {" "}
-                  Modern Javascript Library and Frameworks
+                  Python, PostgreSQL + Django
                 </b>
               </i>
-              &nbsp; like
+              &nbsp; on the backend, along with
               <i>
-                <b className="purple"> React.js and Next.js</b>
-              </i>
+                <b className="purple"> Docker + Kubernetes</b>
+              </i> for deployment.
             </p>
           </Col>
           <Col md={4} className="myAvtar">
@@ -67,7 +62,7 @@ function Home2() {
             <ul className="home-about-social-links">
               <li className="social-icons">
                 <a
-                  href="https://github.com/soumyajit4419"
+                  href="https://github.com/vuhnger"
                   target="_blank"
                   rel="noreferrer"
                   className="icon-colour  home-social-icons"
@@ -77,17 +72,7 @@ function Home2() {
               </li>
               <li className="social-icons">
                 <a
-                  href="https://twitter.com/Soumyajit4419"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="icon-colour  home-social-icons"
-                >
-                  <AiOutlineTwitter />
-                </a>
-              </li>
-              <li className="social-icons">
-                <a
-                  href="https://www.linkedin.com/in/soumyajit4419/"
+                  href="https://www.linkedin.com/in/victor-uhnger/"
                   target="_blank"
                   rel="noreferrer"
                   className="icon-colour  home-social-icons"
@@ -97,12 +82,12 @@ function Home2() {
               </li>
               <li className="social-icons">
                 <a
-                  href="https://www.instagram.com/soumyajit4419"
+                  href="https://www.strava.com/athletes/34349129"
                   target="_blank"
                   rel="noreferrer"
-                  className="icon-colour home-social-icons"
+                  className="icon-colour  home-social-icons"
                 >
-                  <AiFillInstagram />
+                  <FaStrava />
                 </a>
               </li>
             </ul>
@@ -111,5 +96,6 @@ function Home2() {
       </Container>
     </Container>
   );
-}
+};
+
 export default Home2;

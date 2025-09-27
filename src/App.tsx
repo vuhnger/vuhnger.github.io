@@ -17,12 +17,12 @@ import "./style.css";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-function App() {
-  const [load, upadateLoad] = useState(true);
+const App: React.FC = () => {
+  const [load, updateLoad] = useState<boolean>(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      upadateLoad(false);
+      updateLoad(false);
     }, 1200);
 
     return () => clearTimeout(timer);
@@ -45,6 +45,6 @@ function App() {
       </div>
     </Router>
   );
-}
+};
 
 export default App;

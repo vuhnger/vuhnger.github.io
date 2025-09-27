@@ -1,15 +1,15 @@
 import React from "react";
 import Typewriter from "typewriter-effect";
 
-function Type() {
+const Type: React.FC = () => {
   return (
     <Typewriter
       options={{
         strings: [
-          "Software Developer",
-          "Freelancer",
-          "MERN Stack Developer",
-          "Open Source Contributor",
+          "Full Stack Developer",
+          "Computer Science Student",
+          "Frontend Developer",
+          "React + TypeScript Developer",
         ],
         autoStart: true,
         loop: true,
@@ -17,6 +17,6 @@ function Type() {
       }}
     />
   );
-}
+};
 
 export default Type;

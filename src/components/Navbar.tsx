@@ -16,11 +16,11 @@ import {
 
 import { CgFileDocument } from "react-icons/cg";
 
-function NavBar() {
-  const [expand, updateExpanded] = useState(false);
-  const [navColour, updateNavbar] = useState(false);
+const NavBar: React.FC = () => {
+  const [expand, updateExpanded] = useState<boolean>(false);
+  const [navColour, updateNavbar] = useState<boolean>(false);
 
-  function scrollHandler() {
+  function scrollHandler(): void {
     if (window.scrollY >= 20) {
       updateNavbar(true);
     } else {
@@ -44,7 +44,7 @@ function NavBar() {
         <Navbar.Toggle
           aria-controls="responsive-navbar-nav"
           onClick={() => {
-            updateExpanded(expand ? false : "expanded");
+            updateExpanded(!expand);
           }}
         >
           <span></span>
@@ -94,17 +94,17 @@ function NavBar() {
 
             <Nav.Item>
               <Nav.Link
-                href="https://soumyajitblogs.vercel.app/"
+                href="https://github.com/vuhnger"
                 target="_blank"
                 rel="noreferrer"
               >
-                <ImBlog style={{ marginBottom: "2px" }} /> Blogs
+                <ImBlog style={{ marginBottom: "2px" }} /> GitHub
               </Nav.Link>
             </Nav.Item>
 
             <Nav.Item className="fork-btn">
               <Button
-                href="https://github.com/soumyajit4419/Portfolio"
+                href="https://github.com/vuhnger/vuhnger.github.io"
                 target="_blank"
                 className="fork-btn-inner"
               >
@@ -117,6 +117,6 @@ function NavBar() {
       </Container>
     </Navbar>
   );
-}
+};
 
 export default NavBar;

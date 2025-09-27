@@ -1,17 +1,20 @@
 html {
   --section-background-color: linear-gradient(
     to bottom left,
-    rgba(17, 16, 16, 0.582),
-    rgba(12, 8, 24, 0.904)
+    rgba(15, 35, 68, 0.9),
+    rgba(8, 28, 58, 0.95)
   );
 
   --image-gradient: linear-gradient(
     to bottom left,
-    rgba(17, 16, 16, 0.678),
-    rgba(12, 10, 22, 0.863)
+    rgba(15, 35, 68, 0.8),
+    rgba(8, 28, 58, 0.9)
   );
 
-  --imp-text-color: #c770f0;
+  --imp-text-color: #4A90E2;
+  --ocean-blue: #1E3A5F;
+  --light-ocean: #4A90E2;
+  --deep-ocean: #0F233A;
 }
 
 .purple {
@@ -32,7 +35,7 @@ button:focus {
   width: 100%;
   height: 100%;
   z-index: 999999;
-  background-color: #0c0513;
+  background-color: var(--deep-ocean);
   background-image: url(./Assets/pre.svg);
   background-repeat: no-repeat;
   background-position: center;
@@ -57,18 +60,18 @@ button:focus {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #2d1950;
+  background: var(--ocean-blue);
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgba(178, 121, 216, 0.959);
+  background: var(--light-ocean);
   border-radius: 12px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(222, 130, 235, 0.911);
+  background: #6BB6FF;
   border-radius: 12px;
 }
 
@@ -76,9 +79,9 @@ button:focus {
 /* Navbar Section  */
 /* --------- */
 .sticky {
-  background-color: #1b1a2ea9 !important;
+  background-color: rgba(15, 35, 68, 0.9) !important;
   transition: all 0.3s ease-out 0s !important;
-  box-shadow: 0px 10px 10px 0px rgba(9, 5, 29, 0.171) !important;
+  box-shadow: 0px 10px 10px 0px rgba(8, 28, 58, 0.3) !important;
   backdrop-filter: blur(15px) !important;
 }
 
@@ -97,7 +100,7 @@ button:focus {
 
 .navbar-toggler span {
   display: block !important;
-  background-color: #be50f4 !important;
+  background-color: var(--light-ocean) !important;
   height: 4px !important;
   width: 27px !important;
   margin-top: 5px !important;
@@ -140,11 +143,11 @@ button:focus {
   opacity: 0.9 !important;
 }
 
-@media (max-width: 767px) {
+  @media (max-width: 767px) {
   .navbar {
     padding: 1rem 2rem !important;
     font-size: 1.4rem !important;
-    background-color: #181a27 !important;
+    background-color: var(--ocean-blue) !important;
   }
   .navbar-nav .nav-item a::after {
     display: none !important;
@@ -194,7 +197,7 @@ button:focus {
   height: 5px;
   width: 0;
   border-radius: 16px;
-  background: #c95bf5;
+  background: var(--light-ocean);
   bottom: 1px;
   left: 0;
   z-index: -1;
@@ -281,17 +284,17 @@ button:focus {
 }
 
 .main-name {
-  color: #cd5ff8;
+  color: var(--light-ocean);
 }
 
 .Typewriter__wrapper {
   font-size: 2.2em !important;
-  color: #be6adf !important;
+  color: var(--light-ocean) !important;
   font-weight: 600 !important;
 }
 .Typewriter__cursor {
   font-size: 2.4em !important;
-  color: #b562d6 !important;
+  color: var(--light-ocean) !important;
 }
 
 @media (max-width: 767px) {
@@ -402,7 +405,7 @@ button:focus {
 /* Footer */
 /* --------- */
 .footer {
-  background-color: rgb(10, 4, 22);
+  background-color: var(--deep-ocean);
   bottom: 0 !important;
   padding-top: 10px !important;
   padding-bottom: 8px !important ;
@@ -439,7 +442,7 @@ button:focus {
 }
 
 .blockquote-footer {
-  color: #a588c0 !important;
+  color: #87CEEB !important;
 }
 /* --------- */
 /* Projects */
