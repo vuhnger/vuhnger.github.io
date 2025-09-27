@@ -1,12 +1,16 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import spikeyWhites from "../../Assets/forest-spiky-white.svg";
+import SnakeGame from "../SnakeGame";
 
 const Projects: React.FC = () => {
   return (
-    <Container fluid className="project-section">
+    <Container fluid className="project-section" style={{ position: "relative" }}>
+      {/* Snake Game */}
+      <SnakeGame />
+
       {/* Forest background silhouette */}
-      <div 
+      <div
         className="forest-background"
         style={{
           position: "absolute",
@@ -24,7 +28,7 @@ const Projects: React.FC = () => {
           pointerEvents: "none"
         }}
       />
-      
+
       <Container style={{ position: "relative", zIndex: 2 }}>
         <h1 className="project-heading">
           Mine siste <strong className="purple">prosjekter </strong>
@@ -32,7 +36,12 @@ const Projects: React.FC = () => {
         <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
           <Col md={12} style={{ textAlign: "center", padding: "50px" }}>
             <p style={{ color: "white", fontSize: "1.2em" }}>
-Denne siden er jeg ikke ferdig med ennå, men her kommer straks alle prosjektene jeg har jobbet på. ;)
+              Denne siden er jeg ikke ferdig med ennå, men her kommer straks alle prosjektene jeg har jobbet på. ;)
+            </p>
+            <br />
+            <br />
+            <p style={{ color: "white", fontSize: "1.2em" }}>
+              Spill litt snake mens du venter!
             </p>
             <br />
             <br />
@@ -40,8 +49,9 @@ Denne siden er jeg ikke ferdig med ennå, men her kommer straks alle prosjektene
             <br />
             <br />
             <br />
-            <br />
-            <br />
+            <p style={{ color: "white", fontSize: "1.2em" }}>
+              Slangen bruker en algoritme for stifinding til å vise deg raskeste vei til nærmeste eple.
+            </p>
             <br />
             <br />
             <br />
