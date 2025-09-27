@@ -1,0 +1,75 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Experience Card Styles */
+.experience-card {
+  transition: all 0.3s ease-in-out;
+}
+
+.experience-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(74, 144, 226, 0.3) !important;
+  border-color: var(--light-ocean) !important;
+}
+
+.experience-card-col {
+  display: flex;
+  justify-content: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .experience-card .card-body {
+    padding: 20px !important;
+  }
+  
+  .experience-card .card-body > div {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px !important;
+  }
+  
+  .experience-card .card-body img {
+    margin: 0 auto;
+  }
+
+  .experience-card-col {
+    padding: 0 15px;
+  }
+}

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" role="img" aria-label="Spiky forest contour backdrop" fill="none">
+  <title>Spiky Forest Contour Backdrop</title>
+  <g stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round">
+    <!-- fjern trelinje -->
+    <path d="M0 300 
+             L20 250 L40 300 
+             L70 240 L100 300 
+             L130 255 L160 300 
+             L190 245 L220 300 
+             L250 260 L280 300 
+             L310 250 L340 300 
+             L370 240 L400 300 
+             L430 255 L460 300 
+             L490 245 L520 300 
+             L550 260 L580 300 
+             L610 250 L640 300 
+             L670 240 L700 300 
+             L730 255 L760 300 
+             L790 245 L820 300 
+             L850 260 L880 300 
+             L910 250 L940 300 
+             L970 240 L1000 300 
+             L1030 255 L1060 300 
+             L1090 245 L1120 300 
+             L1150 260 L1180 300 
+             L1200 250" 
+          stroke-width="1.8" opacity="0.65"/>
+    <!-- nær trelinje (litt større topper) -->
+    <path d="M0 360 
+             L30 280 L60 360 
+             L90 270 L120 360 
+             L150 285 L180 360 
+             L210 275 L240 360 
+             L270 290 L300 360 
+             L330 280 L360 360 
+             L390 270 L420 360 
+             L450 285 L480 360 
+             L510 275 L540 360 
+             L570 290 L600 360 
+             L630 280 L660 360 
+             L690 270 L720 360 
+             L750 285 L780 360 
+             L810 275 L840 360 
+             L870 290 L900 360 
+             L930 280 L960 360 
+             L990 270 L1020 360 
+             L1050 285 L1080 360 
+             L1110 275 L1140 360 
+             L1170 290 L1200 360" 
+          stroke-width="2.2" opacity="0.8"/>
+  </g>
+</svg>

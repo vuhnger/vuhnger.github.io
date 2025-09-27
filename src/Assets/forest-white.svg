@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" role="img" aria-label="Forest contour backdrop" fill="none">
+  <title>Forest Contour Backdrop</title>
+  <g stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round">
+    <!-- fjernere trelinje -->
+    <path d="M0 260 Q30 220 60 260 T120 260 T180 260 T240 260 T300 260 T360 260 T420 260 T480 260 T540 260 T600 260 T660 260 T720 260 T780 260 T840 260 T900 260 T960 260 T1020 260 T1080 260 T1140 260 T1200 260" stroke-width="1.2" opacity="0.4"/>
+    <!-- midtre trelinje -->
+    <path d="M0 300 Q40 240 80 300 T160 300 T240 300 T320 300 T400 300 T480 300 T560 300 T640 300 T720 300 T800 300 T880 300 T960 300 T1040 300 T1120 300 T1200 300" stroke-width="1.8" opacity="0.55"/>
+    <!-- nær trelinje -->
+    <path d="M0 340 Q50 260 100 340 T200 340 T300 340 T400 340 T500 340 T600 340 T700 340 T800 340 T900 340 T1000 340 T1100 340 T1200 340" stroke-width="2.2" opacity="0.65"/>
+  </g>
+</svg>

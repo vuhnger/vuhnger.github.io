@@ -1,0 +1,47 @@
+import React from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import spikeyWhites from "../../Assets/forest-spiky-white.svg";
+
+const Projects: React.FC = () => {
+  return (
+    <Container fluid className="project-section">
+      {/* Forest background silhouette */}
+      <div 
+        className="forest-background"
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: "100vw",
+          height: "300px",
+          backgroundImage: `url(${spikeyWhites})`,
+          backgroundRepeat: "repeat-x",
+          backgroundPosition: "bottom center",
+          backgroundSize: "cover",
+          opacity: 0.1,
+          zIndex: 1,
+          pointerEvents: "none"
+        }}
+      />
+      
+      <Container style={{ position: "relative", zIndex: 2 }}>
+        <h1 className="project-heading">
+          Mine siste <strong className="purple">prosjekter </strong>
+        </h1>
+        <p style={{ color: "white" }}>
+          Her er noen prosjekter jeg har jobbet med nylig.
+        </p>
+        <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
+          <Col md={12} style={{ textAlign: "center", padding: "50px" }}>
+            <p style={{ color: "white", fontSize: "1.2em" }}>
+              Prosjekter kommer snart.
+            </p>
+          </Col>
+        </Row>
+      </Container>
+    </Container>
+  );
+};
+
+export default Projects;

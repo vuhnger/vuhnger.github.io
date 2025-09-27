@@ -1,0 +1,25 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="VU loading">
+  <defs>
+    <style>
+      .vu {
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 800;
+        font-size: 84px;
+      }
+    </style>
+  </defs>
+
+  <g>
+    <text class="vu" x="50%" y="50%" text-anchor="middle" dominant-baseline="central">
+      <tspan fill="#0D3B66">V</tspan><tspan fill="#2BB0FF">U</tspan>
+    </text>
+    <animateTransform
+      attributeName="transform"
+      attributeType="XML"
+      type="rotate"
+      from="0 64 64"
+      to="360 64 64"
+      dur="2s"
+      repeatCount="indefinite"/>
+  </g>
+</svg>
