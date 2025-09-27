@@ -29,14 +29,30 @@ const Projects: React.FC = () => {
         <h1 className="project-heading">
           Mine siste <strong className="purple">prosjekter </strong>
         </h1>
-        <p style={{ color: "white" }}>
-          Her er noen prosjekter jeg har jobbet med nylig.
-        </p>
         <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
           <Col md={12} style={{ textAlign: "center", padding: "50px" }}>
             <p style={{ color: "white", fontSize: "1.2em" }}>
-              Prosjekter kommer snart.
+Denne siden er jeg ikke ferdig med ennå, men her kommer straks alle prosjektene jeg har jobbet på. ;)
             </p>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
           </Col>
         </Row>
       </Container>
