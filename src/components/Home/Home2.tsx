@@ -11,7 +11,7 @@ import { FaLinkedinIn, FaStrava } from "react-icons/fa";
 
 const Home2: React.FC = () => {
   return (
-    <Container fluid className="home-about-section" id="about">
+    <Container fluid className="home-about-section" id="about" style={{ position: "relative" }}>
       {/* Mountains background positioned to cover full width */}
       <div 
         className="mountains-background"
