@@ -1,6 +1,5 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import spikeyWhites from "../../Assets/forest-spiky-white.svg";
 import SnakeGame from "../SnakeGame";
 
 const Projects: React.FC = () => {
@@ -8,26 +7,6 @@ const Projects: React.FC = () => {
     <Container fluid className="project-section" style={{ position: "relative" }}>
       {/* Snake Game */}
       <SnakeGame />
-
-      {/* Forest background silhouette */}
-      <div
-        className="forest-background"
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: "100vw",
-          height: "300px",
-          backgroundImage: `url(${spikeyWhites})`,
-          backgroundRepeat: "repeat-x",
-          backgroundPosition: "bottom center",
-          backgroundSize: "cover",
-          opacity: 0.1,
-          zIndex: 1,
-          pointerEvents: "none"
-        }}
-      />
 
       <Container style={{ position: "relative", zIndex: 2 }}>
         <h1 className="project-heading">
