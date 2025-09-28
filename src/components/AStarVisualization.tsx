@@ -18,16 +18,18 @@ const AStarVisualization: React.FC = () => {
   const CANVAS_HEIGHT = window.innerHeight;
   const GRID_WIDTH = Math.floor(CANVAS_WIDTH / GRID_SIZE);
   const GRID_HEIGHT = Math.floor(CANVAS_HEIGHT / GRID_SIZE);
-  // No weight - pure A* for better exploration visualization
+  
+  // Generate a unique instance ID to prevent multiple instances
+  const [instanceId] = useState(() => Math.random().toString(36).substr(2, 9));
 
-  // Random start and goal positions
+  // Random start and goal positions - start with invalid positions
   const getRandomPosition = (): Position => ({
     x: Math.floor(Math.random() * (GRID_WIDTH - 4)) + 2,
     y: Math.floor(Math.random() * (GRID_HEIGHT - 4)) + 2
   });
 
-  const [START, setSTART] = useState<Position>(() => getRandomPosition());
-  const [GOAL, setGOAL] = useState<Position>(() => getRandomPosition());
+  const [START, setSTART] = useState<Position>({ x: -1, y: -1 });
+  const [GOAL, setGOAL] = useState<Position>({ x: -1, y: -1 });
 
   const [finalPath, setFinalPath] = useState<Position[]>([]);
   const [currentPath, setCurrentPath] = useState<Position[]>([]);
