@@ -13,17 +13,16 @@ const SnakeGame: React.FC = () => {
   const GRID_WIDTH = Math.floor(CANVAS_WIDTH / GRID_SIZE);
   const GRID_HEIGHT = Math.floor(CANVAS_HEIGHT / GRID_SIZE);
 
-  const [snake, setSnake] = useState<Position[]>([{ x: Math.floor(GRID_WIDTH/4), y: Math.floor(GRID_HEIGHT/2) }]);
-  const [food, setFood] = useState<Position[]>([
-    { x: Math.floor(GRID_WIDTH*3/4), y: Math.floor(GRID_HEIGHT/2) },
-    { x: Math.floor(GRID_WIDTH*3/4), y: Math.floor(GRID_HEIGHT/2) + 5 },
-    { x: Math.floor(GRID_WIDTH*3/4) + 10, y: Math.floor(GRID_HEIGHT/2) },
-    { x: Math.floor(GRID_WIDTH*3/4) + 10, y: Math.floor(GRID_HEIGHT/2) + 5 },
-    { x: Math.floor(GRID_WIDTH*3/4) + 5, y: Math.floor(GRID_HEIGHT/2) - 5 },
-    { x: Math.floor(GRID_WIDTH*3/4) + 5, y: Math.floor(GRID_HEIGHT/2) + 10 },
-    { x: Math.floor(GRID_WIDTH*3/4) - 5, y: Math.floor(GRID_HEIGHT/2) },
-    { x: Math.floor(GRID_WIDTH*3/4) + 15, y: Math.floor(GRID_HEIGHT/2) }
-  ]);
+  // Generate random starting position for snake
+  const generateRandomStartPosition = useCallback(() => {
+    return {
+      x: Math.floor(Math.random() * GRID_WIDTH),
+      y: Math.floor(Math.random() * GRID_HEIGHT)
+    };
+  }, [GRID_WIDTH, GRID_HEIGHT]);
+
+  const [snake, setSnake] = useState<Position[]>([generateRandomStartPosition()]);
+  const [food, setFood] = useState<Position[]>([]); // Start empty, will be populated by generateFood
   const [direction, setDirection] = useState<Position>({ x: 1, y: 0 });
   const [gameRunning, setGameRunning] = useState(true);
   const [pathToClosestFood, setPathToClosestFood] = useState<Position[]>([]);
@@ -138,41 +137,22 @@ const SnakeGame: React.FC = () => {
 
   // Generate random food positions
   const generateFood = useCallback(() => {
-    return [
-      {
+    const foodPositions = [];
+    for (let i = 0; i < 8; i++) {
+      foodPositions.push({
         x: Math.floor(Math.random() * GRID_WIDTH),
         y: Math.floor(Math.random() * GRID_HEIGHT),
-      },
-      {
-        x: Math.floor(Math.random() * GRID_WIDTH),
-        y: Math.floor(Math.random() * GRID_HEIGHT),
-      },
-      {
-        x: Math.floor(Math.random() * GRID_WIDTH),
-        y: Math.floor(Math.random() * GRID_HEIGHT),
-      },
-      {
-        x: Math.floor(Math.random() * GRID_WIDTH),
-        y: Math.floor(Math.random() * GRID_HEIGHT),
-      },
-      {
-        x: Math.floor(Math.random() * GRID_WIDTH),
-        y: Math.floor(Math.random() * GRID_HEIGHT),
-      },
-      {
-        x: Math.floor(Math.random() * GRID_WIDTH),
-        y: Math.floor(Math.random() * GRID_HEIGHT),
-      },
-      {
-        x: Math.floor(Math.random() * GRID_WIDTH),
-        y: Math.floor(Math.random() * GRID_HEIGHT),
-      },
-      {
-        x: Math.floor(Math.random() * GRID_WIDTH),
-        y: Math.floor(Math.random() * GRID_HEIGHT),
-      }
-    ];
-  }, []);
+      });
+    }
+    return foodPositions;
+  }, [GRID_WIDTH, GRID_HEIGHT]);
+
+  // Initialize food on first render
+  useEffect(() => {
+    if (food.length === 0) {
+      setFood(generateFood());
+    }
+  }, [food.length, generateFood]);
 
   // Handle keyboard input
   const handleKeyPress = useCallback((e: KeyboardEvent) => {
@@ -214,19 +194,10 @@ const SnakeGame: React.FC = () => {
 
         // Check wall collision
         if (head.x < 0 || head.x >= GRID_WIDTH || head.y < 0 || head.y >= GRID_HEIGHT) {
-          // Auto restart game
+          // Auto restart game with random positions
           setTimeout(() => {
-            setSnake([{ x: Math.floor(GRID_WIDTH/4), y: Math.floor(GRID_HEIGHT/2) }]);
-            setFood([
-              { x: Math.floor(GRID_WIDTH*3/4), y: Math.floor(GRID_HEIGHT/2) },
-              { x: Math.floor(GRID_WIDTH*3/4), y: Math.floor(GRID_HEIGHT/2) + 5 },
-              { x: Math.floor(GRID_WIDTH*3/4) + 10, y: Math.floor(GRID_HEIGHT/2) },
-              { x: Math.floor(GRID_WIDTH*3/4) + 10, y: Math.floor(GRID_HEIGHT/2) + 5 },
-              { x: Math.floor(GRID_WIDTH*3/4) + 5, y: Math.floor(GRID_HEIGHT/2) - 5 },
-              { x: Math.floor(GRID_WIDTH*3/4) + 5, y: Math.floor(GRID_HEIGHT/2) + 10 },
-              { x: Math.floor(GRID_WIDTH*3/4) - 5, y: Math.floor(GRID_HEIGHT/2) },
-              { x: Math.floor(GRID_WIDTH*3/4) + 15, y: Math.floor(GRID_HEIGHT/2) }
-            ]);
+            setSnake([generateRandomStartPosition()]);
+            setFood(generateFood());
             setDirection({ x: 1, y: 0 });
             setGameRunning(true);
           }, 100);
@@ -235,19 +206,10 @@ const SnakeGame: React.FC = () => {
 
         // Check self collision
         if (newSnake.some(segment => segment.x === head.x && segment.y === head.y)) {
-          // Auto restart game
+          // Auto restart game with random positions
           setTimeout(() => {
-            setSnake([{ x: Math.floor(GRID_WIDTH/4), y: Math.floor(GRID_HEIGHT/2) }]);
-            setFood([
-              { x: Math.floor(GRID_WIDTH*3/4), y: Math.floor(GRID_HEIGHT/2) },
-              { x: Math.floor(GRID_WIDTH*3/4), y: Math.floor(GRID_HEIGHT/2) + 5 },
-              { x: Math.floor(GRID_WIDTH*3/4) + 10, y: Math.floor(GRID_HEIGHT/2) },
-              { x: Math.floor(GRID_WIDTH*3/4) + 10, y: Math.floor(GRID_HEIGHT/2) + 5 },
-              { x: Math.floor(GRID_WIDTH*3/4) + 5, y: Math.floor(GRID_HEIGHT/2) - 5 },
-              { x: Math.floor(GRID_WIDTH*3/4) + 5, y: Math.floor(GRID_HEIGHT/2) + 10 },
-              { x: Math.floor(GRID_WIDTH*3/4) - 5, y: Math.floor(GRID_HEIGHT/2) },
-              { x: Math.floor(GRID_WIDTH*3/4) + 15, y: Math.floor(GRID_HEIGHT/2) }
-            ]);
+            setSnake([generateRandomStartPosition()]);
+            setFood(generateFood());
             setDirection({ x: 1, y: 0 });
             setGameRunning(true);
           }, 100);

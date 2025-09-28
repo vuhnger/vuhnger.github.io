@@ -144,8 +144,6 @@ const AStarVisualization: React.FC = () => {
         setTimeout(() => {
           setFinalPath([]);
           setCurrentPath([]);
-          setSTART({ x: -1, y: -1 });
-          setGOAL({ x: -1, y: -1 });
         }, 4000);
         
         return;
@@ -188,8 +186,6 @@ const AStarVisualization: React.FC = () => {
     setTimeout(() => {
       setFinalPath([]);
       setCurrentPath([]);
-      setSTART({ x: -1, y: -1 });
-      setGOAL({ x: -1, y: -1 });
     }, 2000);
   };
 
