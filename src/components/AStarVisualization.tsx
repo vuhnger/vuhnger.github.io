@@ -76,20 +76,26 @@ const AStarVisualization: React.FC = () => {
 
 
 
-  // A* with current path visualization
+  // A* with current path visualization - simplified and stable
   const runAStar = async () => {
+    if (isSearching) return; // Prevent multiple instances
+    
     setIsSearching(true);
     setFinalPath([]);
     setCurrentPath([]);
 
-    // Generate new random positions but don't update state yet
+    // Generate new random positions
     let newStart = getRandomPosition();
     let newGoal = getRandomPosition();
     
     // Ensure start and goal are not too close
-    while (Math.abs(newStart.x - newGoal.x) + Math.abs(newStart.y - newGoal.y) < 8) {
+    while (Math.abs(newStart.x - newGoal.x) + Math.abs(newStart.y - newGoal.y) < 10) {
       newGoal = getRandomPosition();
     }
+    
+    // Update positions immediately
+    setSTART(newStart);
+    setGOAL(newGoal);
     
     const start = newStart;
     const goal = newGoal;
@@ -107,7 +113,7 @@ const AStarVisualization: React.FC = () => {
     openSet.push(startNode);
 
     let iterations = 0;
-    const maxIterations = 1000; // Prevent infinite loops
+    const maxIterations = 500; // Reduced to prevent long searches
 
     while (openSet.length > 0 && iterations < maxIterations) {
       iterations++;
@@ -121,21 +127,17 @@ const AStarVisualization: React.FC = () => {
       
       closedSet.add(nodeKey);
       
-      // Show current path being evaluated
-      const pathToCurrentNode = reconstructPath(currentAStarNode);
-      setCurrentPath(pathToCurrentNode);
+      // Show current path being evaluated every few steps
+      if (iterations % 3 === 0) {
+        const pathToCurrentNode = reconstructPath(currentAStarNode);
+        setCurrentPath(pathToCurrentNode);
+      }
       
-      // Add delay to see the search progress
-      await new Promise(resolve => setTimeout(resolve, 200));
-
       // Check if we reached the goal
       if (currentAStarNode.x === goal.x && currentAStarNode.y === goal.y) {
         const finalPath = reconstructPath(currentAStarNode);
-        
-        // Update state with new positions AND path
-        setSTART(start);
-        setGOAL(goal);
         setFinalPath(finalPath);
+        setCurrentPath([]); // Clear current path
         setIsSearching(false);
         
         // Clear everything after showing the result
@@ -144,10 +146,13 @@ const AStarVisualization: React.FC = () => {
           setCurrentPath([]);
           setSTART({ x: -1, y: -1 });
           setGOAL({ x: -1, y: -1 });
-        }, 3000);
+        }, 4000);
         
         return;
       }
+
+      // Add delay to see the search progress - slower tempo
+      await new Promise(resolve => setTimeout(resolve, 50));
 
       // Explore neighbors
       const neighbors = getNeighbors(currentAStarNode);
@@ -178,21 +183,35 @@ const AStarVisualization: React.FC = () => {
       }
     }
 
+    // If no path found, still clear and try again
     setIsSearching(false);
+    setTimeout(() => {
+      setFinalPath([]);
+      setCurrentPath([]);
+      setSTART({ x: -1, y: -1 });
+      setGOAL({ x: -1, y: -1 });
+    }, 2000);
   };
 
-  // Auto-restart the search every few seconds
+  // Auto-restart the search - more stable timing
   useEffect(() => {
-    const interval = setInterval(() => {
+    let interval: NodeJS.Timeout;
+    
+    const startSearch = () => {
       if (!isSearching) {
         runAStar();
       }
-    }, 8000);
+    };
+    
+    interval = setInterval(startSearch, 10000); // Longer intervals for stability
 
-    // Start immediately
-    runAStar();
+    // Start immediately but with a small delay
+    const initialTimeout = setTimeout(startSearch, 500);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      clearTimeout(initialTimeout);
+    };
   }, [isSearching]);
 
   // Clear everything before each render to prevent ghosts
@@ -246,40 +265,66 @@ const AStarVisualization: React.FC = () => {
       </defs>
       <rect width="100%" height="100%" fill="url(#astar-grid-pattern)" />
 
-      {/* Current path being searched - subtle blue */}
+      {/* Current path being searched - bright blue */}
       {currentPath
         .filter(pathPos => pathPos.x >= 0 && pathPos.x < GRID_WIDTH && pathPos.y >= 0 && pathPos.y < GRID_HEIGHT)
         .map((pathPos, index) => (
           <rect
-            key={`current-${index}`}
+            key={`current-${pathPos.x}-${pathPos.y}-${index}`}
             x={pathPos.x * GRID_SIZE}
             y={pathPos.y * GRID_SIZE}
             width={GRID_SIZE}
             height={GRID_SIZE}
-            fill="rgba(100, 150, 255, 0.3)"
-            stroke="rgba(100, 150, 255, 0.6)"
-            strokeWidth="1"
+            fill="rgba(100, 150, 255, 0.7)"
+            stroke="rgba(150, 200, 255, 1)"
+            strokeWidth="2"
             style={{
-              opacity: Math.max(0.2, 1 - (index * 0.02))
+              opacity: Math.max(0.5, 1 - (index * 0.03))
             }}
           />
         ))}
 
-      {/* Final optimal path - subtle gold trail */}
+      {/* Start position - green circle */}
+      {START.x >= 0 && (
+        <circle
+          cx={START.x * GRID_SIZE + GRID_SIZE/2}
+          cy={START.y * GRID_SIZE + GRID_SIZE/2}
+          r={GRID_SIZE/3}
+          fill="rgba(0, 255, 0, 0.9)"
+          stroke="rgba(0, 255, 0, 1)"
+          strokeWidth="2"
+        />
+      )}
+
+      {/* Goal position - red circle */}
+      {GOAL.x >= 0 && (
+        <circle
+          cx={GOAL.x * GRID_SIZE + GRID_SIZE/2}
+          cy={GOAL.y * GRID_SIZE + GRID_SIZE/2}
+          r={GRID_SIZE/3}
+          fill="rgba(255, 0, 0, 0.9)"
+          stroke="rgba(255, 0, 0, 1)"
+          strokeWidth="2"
+        />
+      )}
+
+      {/* Final optimal path - bright yellow/gold fill */}
       {finalPath
         .filter(pathPos => pathPos.x >= 0 && pathPos.x < GRID_WIDTH && pathPos.y >= 0 && pathPos.y < GRID_HEIGHT)
         .map((pathPos, index) => (
           <rect
-            key={`path-${index}`}
-            x={pathPos.x * GRID_SIZE}
-            y={pathPos.y * GRID_SIZE}
-            width={GRID_SIZE}
-            height={GRID_SIZE}
-            fill="rgba(255, 215, 0, 0.4)"
-            stroke="rgba(255, 215, 0, 0.7)"
-            strokeWidth="1"
+            key={`final-${pathPos.x}-${pathPos.y}-${index}`}
+            x={pathPos.x * GRID_SIZE + 2}
+            y={pathPos.y * GRID_SIZE + 2}
+            width={GRID_SIZE - 4}
+            height={GRID_SIZE - 4}
+            fill="rgba(255, 255, 0, 1)"
+            stroke="rgba(255, 215, 0, 1)"
+            strokeWidth="3"
+            rx="3"
             style={{
-              opacity: Math.max(0.3, 1 - (index * 0.01))
+              opacity: 1,
+              filter: 'drop-shadow(0 0 8px rgba(255, 255, 0, 0.8))'
             }}
           />
         ))}
