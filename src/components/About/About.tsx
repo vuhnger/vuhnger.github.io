@@ -4,6 +4,7 @@ import GitHubCalendar from "react-github-calendar";
 import { StravaService } from "../../services/stravaService";
 import BeerStats from "../BeerStats";
 import SpotifyStats from "../SpotifyStats";
+import AStarVisualization from "../AStarVisualization";
 import spikeyWhites from "../../Assets/forest-spiky-white.svg";
 
 interface LongestRunDetails {
@@ -123,8 +124,10 @@ const About: React.FC = () => {
     });
   };
   return (
-    <Container fluid className="about-section">
-      <Container style={{ position: "relative", zIndex: 2 }}>
+    <div style={{ position: 'relative', minHeight: '100vh' }}>
+      <AStarVisualization />
+      <Container fluid className="about-section">
+        <Container style={{ position: "relative", zIndex: 1 }}>
         {/* Om meg seksjonen */}
         <Row style={{ justifyContent: "center", padding: "10px" }}>
           <Col
@@ -416,8 +419,9 @@ const About: React.FC = () => {
         {/* Spotify Stats Section */}
         <SpotifyStats />
         
+        </Container>
       </Container>
-    </Container>
+    </div>
   );
 };
 
