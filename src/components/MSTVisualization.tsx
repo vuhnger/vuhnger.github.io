@@ -151,7 +151,7 @@ const MSTVisualization: React.FC = () => {
     for (const edge of edges) {
       // Highlight current edge being considered
       setCurrentEdge(edge);
-      await new Promise(resolve => setTimeout(resolve, 300));
+      await new Promise(resolve => setTimeout(resolve, 50));
       
       // Check if adding this edge creates a cycle
       if (uf.union(edge.from.id, edge.to.id)) {
@@ -165,10 +165,10 @@ const MSTVisualization: React.FC = () => {
           break;
         }
         
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await new Promise(resolve => setTimeout(resolve, 50));
       } else {
         // Edge would create a cycle, skip it
-        await new Promise(resolve => setTimeout(resolve, 200));
+        await new Promise(resolve => setTimeout(resolve, 20));
       }
     }
     
