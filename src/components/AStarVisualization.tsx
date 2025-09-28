@@ -22,11 +22,17 @@ const AStarVisualization: React.FC = () => {
   // Generate a unique instance ID to prevent multiple instances
   const [instanceId] = useState(() => Math.random().toString(36).substr(2, 9));
 
-  // Random start and goal positions - start with invalid positions
-  const getRandomPosition = (): Position => ({
-    x: Math.floor(Math.random() * (GRID_WIDTH - 4)) + 2,
-    y: Math.floor(Math.random() * (GRID_HEIGHT - 4)) + 2
-  });
+  // Random start and goal positions - only in center area of screen
+  const getRandomPosition = (): Position => {
+    const centerX = Math.floor(GRID_WIDTH / 2);
+    const centerY = Math.floor(GRID_HEIGHT / 2);
+    const range = Math.min(Math.floor(GRID_WIDTH / 4), Math.floor(GRID_HEIGHT / 4)); // Quarter of screen size
+    
+    return {
+      x: centerX + Math.floor(Math.random() * (range * 2)) - range,
+      y: centerY + Math.floor(Math.random() * (range * 2)) - range
+    };
+  };
 
   const [START, setSTART] = useState<Position>({ x: -1, y: -1 });
   const [GOAL, setGOAL] = useState<Position>({ x: -1, y: -1 });
@@ -35,12 +41,10 @@ const AStarVisualization: React.FC = () => {
   const [currentPath, setCurrentPath] = useState<Position[]>([]);
   const [isSearching, setIsSearching] = useState(false);
 
-  // Heuristic function (Manhattan distance)
   const heuristic = (pos: Position, goal: Position): number => {
     return Math.abs(pos.x - goal.x) + Math.abs(pos.y - goal.y);
   };
 
-  // Get neighbors of a position
   const getNeighbors = (pos: Position): Position[] => {
     const neighbors: Position[] = [];
     const directions = [
@@ -60,7 +64,6 @@ const AStarVisualization: React.FC = () => {
     return neighbors;
   };
 
-  // Reconstruct path from goal to start
   const reconstructPath = (node: AStarNode): Position[] => {
     const path: Position[] = [];
     let current: AStarNode | undefined = node;
@@ -84,7 +87,7 @@ const AStarVisualization: React.FC = () => {
     let newGoal = getRandomPosition();
     
     // Ensure start and goal are not too close
-    while (Math.abs(newStart.x - newGoal.x) + Math.abs(newStart.y - newGoal.y) < 10) {
+    while (Math.abs(newStart.x - newGoal.x) + Math.abs(newStart.y - newGoal.y) < 8) {
       newGoal = getRandomPosition();
     }
     
@@ -103,7 +106,12 @@ const AStarVisualization: React.FC = () => {
     };
     openSet.push(startNode);
 
-    while (openSet.length > 0) {
+    let iterations = 0;
+    const maxIterations = 1000; // Prevent infinite loops
+
+    while (openSet.length > 0 && iterations < maxIterations) {
+      iterations++;
+      
       // Find node with lowest f score
       openSet.sort((a, b) => a.f - b.f);
       const currentAStarNode = openSet.shift()!;
@@ -118,7 +126,7 @@ const AStarVisualization: React.FC = () => {
       setCurrentPath(pathToCurrentNode);
       
       // Add delay to see the search progress
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise(resolve => setTimeout(resolve, 200));
 
       // Check if we reached the goal
       if (currentAStarNode.x === goal.x && currentAStarNode.y === goal.y) {
@@ -179,7 +187,7 @@ const AStarVisualization: React.FC = () => {
       if (!isSearching) {
         runAStar();
       }
-    }, 5000);
+    }, 8000);
 
     // Start immediately
     runAStar();
@@ -187,31 +195,36 @@ const AStarVisualization: React.FC = () => {
     return () => clearInterval(interval);
   }, [isSearching]);
 
+  // Clear everything before each render to prevent ghosts
+  useEffect(() => {
+    return () => {
+      // Cleanup on unmount
+      setFinalPath([]);
+      setCurrentPath([]);
+    };
+  }, []);
+
   return (
-    <>
+    <div key={instanceId} style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: -1 }}>
       <style>
         {`
-          @keyframes pulse {
+          @keyframes pulse-${instanceId} {
             0% { opacity: 0.6; }
             100% { opacity: 1; }
           }
         `}
       </style>
       <svg
-        key={`astar-${START.x}-${START.y}-${GOAL.x}-${GOAL.y}`}
-        width="100vw"
-        height="100vh"
+        key={`astar-${instanceId}-${finalPath.length}-${currentPath.length}`}
+        width="100%"
+        height="100%"
         viewBox={`0 0 ${CANVAS_WIDTH} ${CANVAS_HEIGHT}`}
         preserveAspectRatio="xMinYMin meet"
         style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          zIndex: -1,
+          width: '100%',
+          height: '100%',
           pointerEvents: 'none',
-          overflow: 'hidden',
-          transform: 'none',
-          WebkitTransform: 'none'
+          overflow: 'hidden'
         }}
       >
       {/* Grid pattern - identical to Snake game */}
@@ -225,15 +238,15 @@ const AStarVisualization: React.FC = () => {
           <rect
             width={GRID_SIZE}
             height={GRID_SIZE}
-            fill="rgba(0, 0, 0, 0.8)"
-            stroke="rgba(255, 255, 255, 0.7)"
+            fill="rgba(0, 0, 0, 0.4)"
+            stroke="rgba(255, 255, 255, 0.3)"
             strokeWidth="1"
           />
         </pattern>
       </defs>
       <rect width="100%" height="100%" fill="url(#astar-grid-pattern)" />
 
-      {/* Current path being searched - light blue */}
+      {/* Current path being searched - subtle blue */}
       {currentPath
         .filter(pathPos => pathPos.x >= 0 && pathPos.x < GRID_WIDTH && pathPos.y >= 0 && pathPos.y < GRID_HEIGHT)
         .map((pathPos, index) => (
@@ -243,16 +256,16 @@ const AStarVisualization: React.FC = () => {
             y={pathPos.y * GRID_SIZE}
             width={GRID_SIZE}
             height={GRID_SIZE}
-            fill="rgba(100, 150, 255, 0.4)"
-            stroke="rgba(100, 150, 255, 0.7)"
+            fill="rgba(100, 150, 255, 0.3)"
+            stroke="rgba(100, 150, 255, 0.6)"
             strokeWidth="1"
             style={{
-              opacity: Math.max(0.3, 1 - (index * 0.02))
+              opacity: Math.max(0.2, 1 - (index * 0.02))
             }}
           />
         ))}
 
-      {/* Final optimal path - simple gold trail */}
+      {/* Final optimal path - subtle gold trail */}
       {finalPath
         .filter(pathPos => pathPos.x >= 0 && pathPos.x < GRID_WIDTH && pathPos.y >= 0 && pathPos.y < GRID_HEIGHT)
         .map((pathPos, index) => (
@@ -262,12 +275,11 @@ const AStarVisualization: React.FC = () => {
             y={pathPos.y * GRID_SIZE}
             width={GRID_SIZE}
             height={GRID_SIZE}
-            fill="rgba(255, 215, 0, 0.6)"
-            stroke="rgba(255, 215, 0, 1)"
-            strokeWidth="2"
+            fill="rgba(255, 215, 0, 0.4)"
+            stroke="rgba(255, 215, 0, 0.7)"
+            strokeWidth="1"
             style={{
-              opacity: Math.max(0.4, 1 - (index * 0.01)),
-              filter: 'drop-shadow(0 0 4px #ffd700)'
+              opacity: Math.max(0.3, 1 - (index * 0.01))
             }}
           />
         ))}
@@ -276,6 +288,6 @@ const AStarVisualization: React.FC = () => {
 
 
       </svg>
-    </>
+    </div>
   );
 };export default AStarVisualization;

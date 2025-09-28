@@ -158,25 +158,7 @@ const About: React.FC = () => {
           </Col>
         </Row>
 
-        {/* Forest background silhouette - positioned after lorem ipsum section */}
-        <div 
-          className="forest-background"
-          style={{
-            position: "relative",
-            width: "100vw",
-            marginLeft: "calc(-50vw + 50%)",
-            height: "250px",
-            backgroundImage: `url(${spikeyWhites})`,
-            backgroundRepeat: "repeat-x",
-            backgroundPosition: "bottom center",
-            backgroundSize: "cover",
-            opacity: 0.15,
-            zIndex: 1,
-            pointerEvents: "none",
-            marginTop: "-30px",
-            marginBottom: "40px"
-          }}
-        />
+
 
         {/* Strava seksjonen */}
         <Row style={{ justifyContent: "center", paddingTop: "20px" }}>
@@ -418,6 +400,25 @@ const About: React.FC = () => {
 
         {/* Spotify Stats Section */}
         <SpotifyStats />
+        
+        {/* Forest background silhouette - positioned at bottom */}
+        <div 
+          className="forest-background"
+          style={{
+            position: "relative",
+            width: "100vw",
+            marginLeft: "calc(-50vw + 50%)",
+            height: "250px",
+            backgroundImage: `url(${spikeyWhites})`,
+            backgroundRepeat: "repeat-x",
+            backgroundPosition: "bottom center",
+            backgroundSize: "cover",
+            opacity: 0.15,
+            zIndex: 1,
+            pointerEvents: "none",
+            marginTop: "60px"
+          }}
+        />
         
         </Container>
       </Container>
