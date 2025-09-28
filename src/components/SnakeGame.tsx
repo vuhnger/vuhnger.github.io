@@ -13,19 +13,20 @@ const SnakeGame: React.FC = () => {
   const GRID_WIDTH = Math.floor(CANVAS_WIDTH / GRID_SIZE);
   const GRID_HEIGHT = Math.floor(CANVAS_HEIGHT / GRID_SIZE);
 
-  // Generate random starting position for snake
-  const generateRandomStartPosition = useCallback(() => {
+  // Generate starting position for snake - always in the middle
+  const generateStartPosition = useCallback(() => {
     return {
-      x: Math.floor(Math.random() * GRID_WIDTH),
-      y: Math.floor(Math.random() * GRID_HEIGHT)
+      x: Math.floor(GRID_WIDTH / 2),
+      y: Math.floor(GRID_HEIGHT / 2)
     };
   }, [GRID_WIDTH, GRID_HEIGHT]);
 
-  const [snake, setSnake] = useState<Position[]>([generateRandomStartPosition()]);
+  const [snake, setSnake] = useState<Position[]>([generateStartPosition()]);
   const [food, setFood] = useState<Position[]>([]); // Start empty, will be populated by generateFood
-  const [direction, setDirection] = useState<Position>({ x: 1, y: 0 });
+  const [direction, setDirection] = useState<Position>({ x: -1, y: 0 }); // Start moving left
   const [gameRunning, setGameRunning] = useState(true);
   const [pathToClosestFood, setPathToClosestFood] = useState<Position[]>([]);
+  const [autoPlay, setAutoPlay] = useState(false);
 
   // A* pathfinding algorithm
   const findPathToClosestFood = useCallback((snakeHead: Position, foodPositions: Position[], snakeBody: Position[]) => {
@@ -156,7 +157,7 @@ const SnakeGame: React.FC = () => {
 
   // Handle keyboard input
   const handleKeyPress = useCallback((e: KeyboardEvent) => {
-    if (!gameRunning) return;
+    if (!gameRunning || autoPlay) return; // Don't allow manual control during auto-play
     
     // Prevent default behavior for arrow keys to stop scrolling
     if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
@@ -177,7 +178,7 @@ const SnakeGame: React.FC = () => {
         setDirection(prev => prev.x !== -1 ? { x: 1, y: 0 } : prev);
         break;
     }
-  }, [gameRunning]);
+  }, [gameRunning, autoPlay]);
 
   // Game loop
   useEffect(() => {
@@ -194,11 +195,11 @@ const SnakeGame: React.FC = () => {
 
         // Check wall collision
         if (head.x < 0 || head.x >= GRID_WIDTH || head.y < 0 || head.y >= GRID_HEIGHT) {
-          // Auto restart game with random positions
+          // Auto restart game with center position and left direction
           setTimeout(() => {
-            setSnake([generateRandomStartPosition()]);
+            setSnake([generateStartPosition()]);
             setFood(generateFood());
-            setDirection({ x: 1, y: 0 });
+            setDirection({ x: -1, y: 0 });
             setGameRunning(true);
           }, 100);
           return currentSnake;
@@ -206,11 +207,11 @@ const SnakeGame: React.FC = () => {
 
         // Check self collision
         if (newSnake.some(segment => segment.x === head.x && segment.y === head.y)) {
-          // Auto restart game with random positions
+          // Auto restart game with center position and left direction
           setTimeout(() => {
-            setSnake([generateRandomStartPosition()]);
+            setSnake([generateStartPosition()]);
             setFood(generateFood());
-            setDirection({ x: 1, y: 0 });
+            setDirection({ x: -1, y: 0 });
             setGameRunning(true);
           }, 100);
           return currentSnake;
@@ -249,6 +250,52 @@ const SnakeGame: React.FC = () => {
     }
   }, [snake, food, findPathToClosestFood]);
 
+  // Auto-play logic: Follow A* path
+  useEffect(() => {
+    if (!autoPlay || !gameRunning) return;
+
+    // Instead of a separate interval, let's use a simpler approach
+    // Update direction based on current path every time the path changes
+    if (pathToClosestFood.length > 0 && snake.length > 0) {
+      const currentHead = snake[0];
+      
+      // Find the first position in the path that's different from current head
+      let nextPosition = null;
+      for (const pathPos of pathToClosestFood) {
+        if (pathPos.x !== currentHead.x || pathPos.y !== currentHead.y) {
+          nextPosition = pathPos;
+          break;
+        }
+      }
+      
+      if (nextPosition) {
+        // Calculate direction to next position
+        const deltaX = nextPosition.x - currentHead.x;
+        const deltaY = nextPosition.y - currentHead.y;
+        
+        console.log('AUTO-PLAY: Current head:', currentHead, 'Next position:', nextPosition);
+        console.log('AUTO-PLAY: Delta X:', deltaX, 'Delta Y:', deltaY);
+        
+        // Update direction based on next step in path
+        if (Math.abs(deltaX) === 1 && deltaY === 0) {
+          // Move horizontally
+          const newDirection = deltaX > 0 ? { x: 1, y: 0 } : { x: -1, y: 0 };
+          console.log('AUTO-PLAY: Setting horizontal direction:', newDirection);
+          setDirection(newDirection);
+        } else if (Math.abs(deltaY) === 1 && deltaX === 0) {
+          // Move vertically
+          const newDirection = deltaY > 0 ? { x: 0, y: 1 } : { x: 0, y: -1 };
+          console.log('AUTO-PLAY: Setting vertical direction:', newDirection);
+          setDirection(newDirection);
+        } else {
+          console.log('AUTO-PLAY: Invalid move - distance:', Math.abs(deltaX) + Math.abs(deltaY));
+        }
+      } else {
+        console.log('AUTO-PLAY: No valid next position found in path');
+      }
+    }
+  }, [autoPlay, gameRunning, pathToClosestFood, snake]);
+
   // Add event listener
   useEffect(() => {
     window.addEventListener('keydown', handleKeyPress);
@@ -256,27 +303,87 @@ const SnakeGame: React.FC = () => {
   }, [handleKeyPress]);
 
   return (
-    <div 
-      style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        pointerEvents: 'none',
-        zIndex: 1,
-        overflow: 'hidden'
-      }}
-    >
-      <svg
-        width="100%"
-        height="100%"
+    <>
+      {/* A* Toggle Button - Outside the main container to avoid pointer event issues */}
+      <div
+        style={{
+          position: 'fixed',
+          top: '20px',
+          right: '20px',
+          zIndex: 9999,
+          pointerEvents: 'all'
+        }}
+      >
+        <button
+          onClick={() => setAutoPlay(!autoPlay)}
+          style={{
+            padding: '10px 20px',
+            backgroundColor: autoPlay ? '#00ff41' : 'rgba(0, 0, 0, 0.7)',
+            color: autoPlay ? '#000' : '#00ff41',
+            border: `2px solid #00ff41`,
+            borderRadius: '5px',
+            cursor: 'pointer',
+            fontFamily: 'monospace',
+            fontSize: '14px',
+            fontWeight: 'bold',
+            transition: 'all 0.3s ease',
+            textTransform: 'uppercase',
+            letterSpacing: '1px',
+            filter: 'drop-shadow(0 0 5px rgba(0, 255, 65, 0.5))'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'scale(1.05)';
+            e.currentTarget.style.filter = 'drop-shadow(0 0 10px rgba(0, 255, 65, 0.8))';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'scale(1)';
+            e.currentTarget.style.filter = 'drop-shadow(0 0 5px rgba(0, 255, 65, 0.5))';
+          }}
+        >
+          {autoPlay ? 'Auto-spill PÅ' : 'Auto-spill AV'}
+        </button>
+        
+        {/* Debug info */}
+        {autoPlay && (
+          <div style={{
+            marginTop: '10px',
+            padding: '5px',
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            color: '#00ff41',
+            fontSize: '12px',
+            fontFamily: 'monospace',
+            borderRadius: '3px',
+            border: '1px solid #00ff41'
+          }}>
+            Retning {direction.x === 1 ? '→' : direction.x === -1 ? '←' : direction.y === 1 ? '↓' : '↑'}
+            <br/>
+            Sti: {pathToClosestFood.length}
+          </div>
+        )}
+      </div>
+
+      {/* Snake Game Container */}
+      <div 
         style={{
           position: 'absolute',
           top: 0,
           left: 0,
+          width: '100%',
+          height: '100%',
+          pointerEvents: 'none',
+          zIndex: 1,
+          overflow: 'hidden'
         }}
       >
+        <svg
+          width="100%"
+          height="100%"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+          }}
+        >
         {/* Grid lines */}
         <defs>
           <pattern
@@ -344,7 +451,8 @@ const SnakeGame: React.FC = () => {
         ))}
       </svg>
 
-    </div>
+      </div>
+    </>
   );
 };
 
