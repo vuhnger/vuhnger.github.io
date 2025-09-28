@@ -12,6 +12,7 @@ import { AiOutlineMail } from "react-icons/ai";
 import drDropinLogo from "../../Assets/DrDropin_bedrift_primær_positiv.svg";
 import bekkLogo from "../../Assets/Bekk-logo.webp";
 import uioLogo from "../../Assets/02_uio_segl_pos.jpg";
+import forsvaretLogo from "../../Assets/forsvaret_facebook_profilbilde.jpg";
 
 const ResumeNew: React.FC = () => {
   const experiences = [
@@ -61,7 +62,7 @@ const ResumeNew: React.FC = () => {
       link: ""
     },
     {
-      companyLogo: "https://no.wikipedia.org/wiki/Forsvarets_v%C3%A5pen#/media/Fil:Coat_of_arms_of_the_Norwegian_Armed_Forces.svg",
+      companyLogo: forsvaretLogo,
       companyName: "Forsvaret",
       fromDate: "September 2020",
       toDate: "September 2021",
