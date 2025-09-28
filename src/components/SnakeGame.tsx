@@ -26,7 +26,7 @@ const SnakeGame: React.FC = () => {
   const [direction, setDirection] = useState<Position>({ x: -1, y: 0 }); // Start moving left
   const [gameRunning, setGameRunning] = useState(true);
   const [pathToClosestFood, setPathToClosestFood] = useState<Position[]>([]);
-  const [autoPlay, setAutoPlay] = useState(false);
+  const [autoPlay, setAutoPlay] = useState(true);
 
   // A* pathfinding algorithm
   const findPathToClosestFood = useCallback((snakeHead: Position, foodPositions: Position[], snakeBody: Position[]) => {
