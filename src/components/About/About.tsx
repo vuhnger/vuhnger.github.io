@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Spinner } from "react-bootstrap";
 import GitHubCalendar from "react-github-calendar";
 import { StravaService } from "../../services/stravaService";
+import BeerStats from "../BeerStats";
 import spikeyWhites from "../../Assets/forest-spiky-white.svg";
 
 interface LongestRunDetails {
@@ -407,6 +408,10 @@ const About: React.FC = () => {
             </Card>
           </Col>
         </Row>
+
+        {/* Beer Stats Section */}
+        <BeerStats />
+        
       </Container>
     </Container>
   );
