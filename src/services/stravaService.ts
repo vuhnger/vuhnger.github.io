@@ -83,6 +83,11 @@ interface LongestRideDetails {
   movingTime: number; // in seconds
 }
 
+interface StoredAccessToken {
+  token: string;
+  expiresAt: number;
+}
+
 interface RunningStats {
   runsThisYear: number;
   totalKilometers: number;
@@ -117,8 +122,11 @@ export class StravaService {
   private static readonly ATHLETE_ID = '34349129';
   private static readonly CACHE_KEY = 'strava_cache';
   private static readonly CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+  private static readonly ACCESS_TOKEN_STORAGE_KEY = 'strava_access_token_v1';
+  private static readonly REFRESH_TOKEN_STORAGE_KEY = 'strava_refresh_token_v1';
+  private static readonly ACCESS_TOKEN_EXPIRY_BUFFER = 60; // seconds
   private static currentAccessToken: string | null = null;
-  
+
   private static getClientId(): string {
     // You'll need to add your client ID to the .env file
     return process.env.REACT_APP_STRAVA_CLIENT_ID || '';
@@ -129,12 +137,96 @@ export class StravaService {
            process.env.strava_client_secret || '';
   }
 
+  private static isLocalStorageAvailable(): boolean {
+    return typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
+  }
+
+  private static loadStoredAccessToken(): StoredAccessToken | null {
+    if (!this.isLocalStorageAvailable()) {
+      return null;
+    }
+
+    try {
+      const raw = localStorage.getItem(this.ACCESS_TOKEN_STORAGE_KEY);
+      if (!raw) {
+        return null;
+      }
+
+      const parsed = JSON.parse(raw) as Partial<StoredAccessToken>;
+      if (!parsed.token || !parsed.expiresAt) {
+        localStorage.removeItem(this.ACCESS_TOKEN_STORAGE_KEY);
+        return null;
+      }
+
+      const nowInSeconds = Math.floor(Date.now() / 1000);
+      if (parsed.expiresAt <= nowInSeconds + this.ACCESS_TOKEN_EXPIRY_BUFFER) {
+        localStorage.removeItem(this.ACCESS_TOKEN_STORAGE_KEY);
+        return null;
+      }
+
+      return { token: parsed.token, expiresAt: parsed.expiresAt };
+    } catch (error) {
+      console.error('Failed to read stored Strava access token:', error);
+      localStorage.removeItem(this.ACCESS_TOKEN_STORAGE_KEY);
+      return null;
+    }
+  }
+
+  private static saveAccessToken(token: string, expiresAt: number): void {
+    if (!this.isLocalStorageAvailable()) {
+      return;
+    }
+
+    try {
+      const payload: StoredAccessToken = { token, expiresAt };
+      localStorage.setItem(this.ACCESS_TOKEN_STORAGE_KEY, JSON.stringify(payload));
+    } catch (error) {
+      console.error('Failed to persist Strava access token:', error);
+    }
+  }
+
+  private static loadStoredRefreshToken(): string | null {
+    if (!this.isLocalStorageAvailable()) {
+      return null;
+    }
+
+    try {
+      const refreshToken = localStorage.getItem(this.REFRESH_TOKEN_STORAGE_KEY);
+      return refreshToken || null;
+    } catch (error) {
+      console.error('Failed to read stored Strava refresh token:', error);
+      return null;
+    }
+  }
+
+  private static saveRefreshToken(token: string): void {
+    if (!this.isLocalStorageAvailable()) {
+      return;
+    }
+
+    try {
+      localStorage.setItem(this.REFRESH_TOKEN_STORAGE_KEY, token);
+    } catch (error) {
+      console.error('Failed to persist Strava refresh token:', error);
+    }
+  }
+
   private static getRefreshToken(): string {
+    const storedRefreshToken = this.loadStoredRefreshToken();
+    if (storedRefreshToken) {
+      return storedRefreshToken;
+    }
+
     return process.env.REACT_APP_STRAVA_REFRESH_TOKEN || 
            process.env.strava_refresh_token || '';
   }
 
   private static getStoredAccessToken(): string {
+    const stored = this.loadStoredAccessToken();
+    if (stored) {
+      return stored.token;
+    }
+
     return process.env.REACT_APP_STRAVA_ACCESS_TOKEN || 
            process.env.strava_access_token || '';
   }
@@ -171,6 +263,13 @@ export class StravaService {
 
       const data: TokenRefreshResponse = await response.json();
       this.currentAccessToken = data.access_token;
+      if (typeof data.expires_at === 'number') {
+        this.saveAccessToken(data.access_token, data.expires_at);
+      }
+
+      if (data.refresh_token) {
+        this.saveRefreshToken(data.refresh_token);
+      }
       
       console.log('🔄 Strava token refreshed successfully');
       return data.access_token;
