@@ -717,7 +717,7 @@ export class StravaService {
   }
 
   /**
-   * Get a simplified running stats object with fallback values and caching
+   * Get running stats with caching support
    */
   static async getRunningStatsWithFallback(): Promise<RunningStats> {
     // Check cache first
@@ -727,34 +727,17 @@ export class StravaService {
       return cached.runningStats;
     }
 
-    try {
-      console.log('🌐 Fetching fresh running stats from Strava API...');
-      const result = await this.getRunningStats();
-      console.log('🏃‍♂️ Running stats result:', result);
-      
-      // We'll cache after getting both running and cycling stats
-      // For now, just return the result
-      return result;
-    } catch (error) {
-      console.error('Falling back to placeholder values due to API error:', error);
-      return {
-        runsThisYear: 89, // Realistic fallback
-        totalKilometers: 650, // Realistic fallback  
-        longestRunKm: 30.0, // Your mentioned longest
-        longestRunDetails: {
-          distance: 30.0,
-          date: '2025-08-15T10:30:00Z',
-          pace: '5:20',
-          elevationGain: 245,
-          name: 'Langtur 30k',
-          movingTime: 9600
-        }
-      };
-    }
+    console.log('🌐 Fetching fresh running stats from Strava API...');
+    const result = await this.getRunningStats();
+    console.log('🏃‍♂️ Running stats result:', result);
+    
+    // We'll cache after getting both running and cycling stats
+    // For now, just return the result
+    return result;
   }
 
   /**
-   * Get a simplified cycling stats object with fallback values and caching
+   * Get cycling stats with caching support
    */
   static async getCyclingStatsWithFallback(): Promise<CyclingStats> {
     // Check cache first
@@ -764,30 +747,13 @@ export class StravaService {
       return cached.cyclingStats;
     }
 
-    try {
-      console.log('🌐 Fetching fresh cycling stats from Strava API...');
-      const result = await this.getCyclingStats();
-      console.log('🚴‍♂️ Cycling stats result:', result);
-      
-      // We'll cache after getting both running and cycling stats
-      // For now, just return the result
-      return result;
-    } catch (error) {
-      console.error('Falling back to cycling placeholder values due to API error:', error);
-      return {
-        ridesThisYear: 45, // Realistic fallback
-        totalKilometers: 650, // Realistic fallback
-        longestRideKm: 85, // Realistic fallback
-        longestRideDetails: {
-          distance: 85,
-          date: '2025-07-20T09:00:00Z',
-          avgSpeed: '28.5',
-          elevationGain: 450,
-          name: 'Lang sykkeltur',
-          movingTime: 10800
-        }
-      };
-    }
+    console.log('🌐 Fetching fresh cycling stats from Strava API...');
+    const result = await this.getCyclingStats();
+    console.log('🚴‍♂️ Cycling stats result:', result);
+    
+    // We'll cache after getting both running and cycling stats
+    // For now, just return the result
+    return result;
   }
 
   /**
@@ -804,58 +770,20 @@ export class StravaService {
       };
     }
 
-    try {
-      console.log('🌐 Fetching fresh stats from Strava API...');
-      
-      // Fetch both stats
-      const [runningStats, cyclingStats] = await Promise.all([
-        this.getRunningStats(),
-        this.getCyclingStats()
-      ]);
+    console.log('🌐 Fetching fresh stats from Strava API...');
+    
+    // Fetch both stats
+    const [runningStats, cyclingStats] = await Promise.all([
+      this.getRunningStats(),
+      this.getCyclingStats()
+    ]);
 
-      // Save to cache
-      this.saveCache(runningStats, cyclingStats);
-      
-      return {
-        running: runningStats,
-        cycling: cyclingStats
-      };
-    } catch (error) {
-      console.error('API error, using fallback values:', error);
-      
-      // Fallback values
-      const fallbackRunning: RunningStats = {
-        runsThisYear: 89,
-        totalKilometers: 650,
-        longestRunKm: 30.0,
-        longestRunDetails: {
-          distance: 30.0,
-          date: '2025-08-15T10:30:00Z',
-          pace: '5:20',
-          elevationGain: 245,
-          name: 'Langtur 30k',
-          movingTime: 9600
-        }
-      };
-
-      const fallbackCycling: CyclingStats = {
-        ridesThisYear: 45,
-        totalKilometers: 650,
-        longestRideKm: 85,
-        longestRideDetails: {
-          distance: 85,
-          date: '2025-07-20T09:00:00Z',
-          avgSpeed: '28.5',
-          elevationGain: 450,
-          name: 'Lang sykkeltur',
-          movingTime: 10800
-        }
-      };
-
-      return {
-        running: fallbackRunning,
-        cycling: fallbackCycling
-      };
-    }
+    // Save to cache
+    this.saveCache(runningStats, cyclingStats);
+    
+    return {
+      running: runningStats,
+      cycling: cyclingStats
+    };
   }
 }

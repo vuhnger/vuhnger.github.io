@@ -64,21 +64,13 @@ const About: React.FC = () => {
         
       } catch (err) {
         console.error('Failed to fetch stats:', err);
-        setError('Kunne ikke laste statistikk');
+        const message = err instanceof Error ? err.message : 'Kunne ikke laste statistikk';
+        setError(message);
         
-        // Set fallback data
-        setRunningStats({
-          runsThisYear: 0,
-          totalKilometers: 0,
-          longestRunKm: 0,
-          longestRunDetails: undefined,
-        });
-        setCyclingStats({
-          ridesThisYear: 0,
-          totalKilometers: 0,
-          longestRideKm: 0,
-          longestRideDetails: undefined,
-        });
+        // Clear existing stats so UI shows error state
+        setRunningStats(null);
+        setCyclingStats(null);
+        setLastUpdated(null);
       } finally {
         setLoading(false);
       }
@@ -181,7 +173,7 @@ const About: React.FC = () => {
                     border: "1px solid rgba(255, 193, 7, 0.3)"
                   }}>
                     <small style={{ color: "#ffc107" }}>
-                      ⚠️ {error} - Viser placeholder-data
+                      ⚠️ {error}
                     </small>
                   </div>
                 )}
