@@ -51,22 +51,22 @@ const About: React.FC = () => {
       try {
         setLoading(true);
         setError(null);
-        
+
         // Get both Strava stats with caching
         const { running, cycling } = await StravaService.getStatsWithCache();
-        
+
         setRunningStats(running);
         setCyclingStats(cycling);
-        
+
         // Get cache timestamp for display (use Strava cache timestamp as primary)
         const cacheTimestamp = StravaService.getCacheTimestamp();
         setLastUpdated(cacheTimestamp || Date.now());
-        
+
       } catch (err) {
         console.error('Failed to fetch stats:', err);
         const message = err instanceof Error ? err.message : 'Kunne ikke laste statistikk';
         setError(message);
-        
+
         // Clear existing stats so UI shows error state
         setRunningStats(null);
         setCyclingStats(null);
@@ -85,7 +85,7 @@ const About: React.FC = () => {
     const diffMs = now - timestamp;
     const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
     const diffDays = Math.floor(diffHours / 24);
-    
+
     if (diffDays > 0) {
       return `${diffDays} dag${diffDays > 1 ? 'er' : ''} siden`;
     } else if (diffHours > 0) {
@@ -109,8 +109,8 @@ const About: React.FC = () => {
 
   const formatDate = (dateString: string): string => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('no-NO', { 
-      day: 'numeric', 
+    return date.toLocaleDateString('no-NO', {
+      day: 'numeric',
       month: 'short',
       year: 'numeric'
     });
@@ -120,298 +120,298 @@ const About: React.FC = () => {
       <AStarVisualization />
       <Container fluid className="about-section">
         <Container style={{ position: "relative", zIndex: 1 }}>
-        {/* Om meg seksjonen */}
-        <Row style={{ justifyContent: "center", padding: "10px" }}>
-          <Col
-            md={8}
-            style={{
-              justifyContent: "center",
-              paddingTop: "30px",
-              paddingBottom: "50px",
-            }}
-          >
-            <h1 style={{ fontSize: "2.1em", paddingBottom: "20px" }}>
-              Om <strong className="purple">meg</strong>
-            </h1>
-            <Card className="quote-card-view">
-              <Card.Body>
-                <blockquote className="blockquote mb-0">
-                  <p style={{ textAlign: "justify", fontSize: "1.1em" }}>
-                    Jeg studerer for tiden i Oslo. 
+          {/* Om meg seksjonen */}
+          <Row style={{ justifyContent: "center", padding: "10px" }}>
+            <Col
+              md={8}
+              style={{
+                justifyContent: "center",
+                paddingTop: "30px",
+                paddingBottom: "50px",
+              }}
+            >
+              <h1 style={{ fontSize: "2.1em", paddingBottom: "20px" }}>
+                Om <strong className="purple">meg</strong>
+              </h1>
+              <Card className="quote-card-view">
+                <Card.Body>
+                  <blockquote className="blockquote mb-0">
+                    <p style={{ textAlign: "justify", fontSize: "1.1em" }}>
+                      Jeg studerer for tiden i Oslo.
 
-                    <br />
-                    <br />
+                      <br />
+                      <br />
 
-                  </p>
-                  
-                </blockquote>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
+                    </p>
+
+                  </blockquote>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
 
 
 
-        {/* Strava seksjonen */}
-        <Row style={{ justifyContent: "center", paddingTop: "20px" }}>
-          <Col md={8}>
-            <h2 style={{ fontSize: "2em", paddingBottom: "20px", textAlign: "center" }}>
-              <strong className="purple">Jeg liker å løpe...</strong> 🏃‍♂️
-            </h2>
-            <p>
-              Her er løpingen min for {new Date().getFullYear()} i tall.
-            </p>
-            <Card className="quote-card-view">
-              <Card.Body>
-                {error && (
-                  <div style={{ 
-                    textAlign: "center", 
-                    marginBottom: "20px",
-                    padding: "10px",
-                    backgroundColor: "rgba(255, 193, 7, 0.1)",
-                    borderRadius: "5px",
-                    border: "1px solid rgba(255, 193, 7, 0.3)"
-                  }}>
-                    <small style={{ color: "#ffc107" }}>
-                      ⚠️ {error}
-                    </small>
-                  </div>
-                )}
-                {lastUpdated && (
-                  <div style={{ 
-                    textAlign: "center", 
-                    marginBottom: "20px",
-                    fontSize: "0.9em",
-                    color: "rgba(255, 255, 255, 0.6)"
-                  }}>
-                    Sist oppdatert: {formatTimeAgo(lastUpdated)}
-                  </div>
-                )}
-                <Row className="text-center">
-                  <Col md={4} style={{ marginBottom: "20px" }}>
-                    <div style={{ 
-                      padding: "20px", 
-                      backgroundColor: "rgba(74, 144, 226, 0.1)", 
-                      borderRadius: "10px",
-                      border: "1px solid var(--light-ocean)"
+          {/* Strava seksjonen */}
+          <Row style={{ justifyContent: "center", paddingTop: "20px" }}>
+            <Col md={8}>
+              <h2 style={{ fontSize: "2em", paddingBottom: "20px", textAlign: "center" }}>
+                <strong className="purple">Jeg liker å løpe...</strong> 🏃‍♂️
+              </h2>
+              <p>
+                Her er løpingen min for {new Date().getFullYear()} i tall.
+              </p>
+              <Card className="quote-card-view">
+                <Card.Body>
+                  {error && (
+                    <div style={{
+                      textAlign: "center",
+                      marginBottom: "20px",
+                      padding: "10px",
+                      backgroundColor: "rgba(255, 193, 7, 0.1)",
+                      borderRadius: "5px",
+                      border: "1px solid rgba(255, 193, 7, 0.3)"
                     }}>
-                      <h3 style={{ color: "var(--light-ocean)", fontSize: "2.5em", marginBottom: "10px" }}>
-                        {loading ? <Spinner animation="border" size="sm" /> : formatRunCount(runningStats?.runsThisYear || 0)}
-                      </h3>
-                      <p style={{ fontSize: "1.1em", marginBottom: "0" }}>
-                        turer i år
-                      </p>
+                      <small style={{ color: "#ffc107" }}>
+                        ⚠️ {error}
+                      </small>
                     </div>
-                  </Col>
-                  <Col md={4} style={{ marginBottom: "20px" }}>
-                    <div style={{ 
-                      padding: "20px", 
-                      backgroundColor: "rgba(74, 144, 226, 0.1)", 
-                      borderRadius: "10px",
-                      border: "1px solid var(--light-ocean)"
+                  )}
+                  {lastUpdated && (
+                    <div style={{
+                      textAlign: "center",
+                      marginBottom: "20px",
+                      fontSize: "0.9em",
+                      color: "rgba(255, 255, 255, 0.6)"
                     }}>
-                      <h3 style={{ color: "var(--light-ocean)", fontSize: "2.5em", marginBottom: "10px" }}>
-                        {loading ? <Spinner animation="border" size="sm" /> : `${formatDistance(runningStats?.totalKilometers || 0)} km`}
-                      </h3>
-                      <p style={{ fontSize: "1.1em", marginBottom: "0" }}>
-                        totalt i år
-                      </p>
+                      Sist oppdatert: {formatTimeAgo(lastUpdated)}
                     </div>
-                  </Col>
-                  <Col md={4} style={{ marginBottom: "20px" }}>
-                    <div style={{ 
-                      padding: "20px", 
-                      backgroundColor: "rgba(74, 144, 226, 0.1)", 
-                      borderRadius: "10px",
-                      border: "1px solid var(--light-ocean)",
-                      height: "100%"
-                    }}>
-                      <h3 style={{ color: "var(--light-ocean)", fontSize: "2.2em", marginBottom: "8px" }}>
-                        {loading ? <Spinner animation="border" size="sm" /> : `${formatDistance(runningStats?.longestRunKm || 0)} km`}
-                      </h3>
-                      <p style={{ fontSize: "1.1em", marginBottom: "15px", fontWeight: "600" }}>
-                        lengste tur
-                      </p>
-                      {runningStats?.longestRunDetails && !loading && (
-                        <div style={{ fontSize: "0.9em", color: "rgba(255, 255, 255, 0.8)" }}>
-                          <div style={{ marginBottom: "8px" }}>
-                            <strong>📅 {formatDate(runningStats.longestRunDetails.date)}</strong>
+                  )}
+                  <Row className="text-center">
+                    <Col md={4} style={{ marginBottom: "20px" }}>
+                      <div style={{
+                        padding: "20px",
+                        backgroundColor: "rgba(74, 144, 226, 0.1)",
+                        borderRadius: "10px",
+                        border: "1px solid var(--light-ocean)"
+                      }}>
+                        <h3 style={{ color: "var(--light-ocean)", fontSize: "2.5em", marginBottom: "10px" }}>
+                          {loading ? <Spinner animation="border" size="sm" /> : formatRunCount(runningStats?.runsThisYear || 0)}
+                        </h3>
+                        <p style={{ fontSize: "1.1em", marginBottom: "0" }}>
+                          turer i år
+                        </p>
+                      </div>
+                    </Col>
+                    <Col md={4} style={{ marginBottom: "20px" }}>
+                      <div style={{
+                        padding: "20px",
+                        backgroundColor: "rgba(74, 144, 226, 0.1)",
+                        borderRadius: "10px",
+                        border: "1px solid var(--light-ocean)"
+                      }}>
+                        <h3 style={{ color: "var(--light-ocean)", fontSize: "2.5em", marginBottom: "10px" }}>
+                          {loading ? <Spinner animation="border" size="sm" /> : `${formatDistance(runningStats?.totalKilometers || 0)} km`}
+                        </h3>
+                        <p style={{ fontSize: "1.1em", marginBottom: "0" }}>
+                          totalt i år
+                        </p>
+                      </div>
+                    </Col>
+                    <Col md={4} style={{ marginBottom: "20px" }}>
+                      <div style={{
+                        padding: "20px",
+                        backgroundColor: "rgba(74, 144, 226, 0.1)",
+                        borderRadius: "10px",
+                        border: "1px solid var(--light-ocean)",
+                        height: "100%"
+                      }}>
+                        <h3 style={{ color: "var(--light-ocean)", fontSize: "2.2em", marginBottom: "8px" }}>
+                          {loading ? <Spinner animation="border" size="sm" /> : `${formatDistance(runningStats?.longestRunKm || 0)} km`}
+                        </h3>
+                        <p style={{ fontSize: "1.1em", marginBottom: "15px", fontWeight: "600" }}>
+                          lengste tur
+                        </p>
+                        {runningStats?.longestRunDetails && !loading && (
+                          <div style={{ fontSize: "0.9em", color: "rgba(255, 255, 255, 0.8)" }}>
+                            <div style={{ marginBottom: "8px" }}>
+                              <strong>📅 {formatDate(runningStats.longestRunDetails.date)}</strong>
+                            </div>
+                            <div style={{ marginBottom: "6px" }}>
+                              ⚡ {runningStats.longestRunDetails.pace} min/km
+                            </div>
+                            <div style={{ marginBottom: "6px" }}>
+                              ⛰️ {runningStats.longestRunDetails.elevationGain}m stigning
+                            </div>
+                            <div style={{
+                              fontSize: "0.8em",
+                              fontStyle: "italic",
+                              textOverflow: "ellipsis",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden"
+                            }}>
+                              "{runningStats.longestRunDetails.name}"
+                            </div>
                           </div>
-                          <div style={{ marginBottom: "6px" }}>
-                            ⚡ {runningStats.longestRunDetails.pace} min/km
-                          </div>
-                          <div style={{ marginBottom: "6px" }}>
-                            ⛰️ {runningStats.longestRunDetails.elevationGain}m stigning
-                          </div>
-                          <div style={{ 
-                            fontSize: "0.8em", 
-                            fontStyle: "italic",
-                            textOverflow: "ellipsis",
-                            whiteSpace: "nowrap",
-                            overflow: "hidden"
-                          }}>
-                            "{runningStats.longestRunDetails.name}"
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </Col>
-                </Row>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
+                        )}
+                      </div>
+                    </Col>
+                  </Row>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
 
-        {/* Sykling statistikk */}
-        <Row style={{ justifyContent: "center", paddingTop: "50px", paddingBottom: "50px" }}>
-          <Col md={8}>
-            <h2 style={{ fontSize: "2em", paddingBottom: "20px", textAlign: "center" }}>
-              <strong className="purple">Og noen ganger sykler jeg og...</strong>
-            </h2>
-            <p>
-              Dataen er hentet direkte fra Strava.
-            </p>
-            <Card className="quote-card-view">
-              <Card.Body>
-                <Row>
-                  <Col md={4} style={{ marginBottom: "20px" }}>
-                    <div style={{ 
-                      padding: "20px", 
-                      backgroundColor: "rgba(74, 144, 226, 0.1)", 
-                      borderRadius: "10px",
-                      border: "1px solid var(--light-ocean)",
-                      height: "100%"
-                    }}>
-                      <h3 style={{ color: "var(--light-ocean)", fontSize: "2.2em", marginBottom: "8px" }}>
-                        {loading ? <Spinner animation="border" size="sm" /> : formatRunCount(cyclingStats?.ridesThisYear || 0)}
-                      </h3>
-                      <p style={{ fontSize: "1.1em", marginBottom: "0", fontWeight: "600" }}>
-                        turer i år
-                      </p>
-                    </div>
-                  </Col>
-                  <Col md={4} style={{ marginBottom: "20px" }}>
-                    <div style={{ 
-                      padding: "20px", 
-                      backgroundColor: "rgba(74, 144, 226, 0.1)", 
-                      borderRadius: "10px",
-                      border: "1px solid var(--light-ocean)",
-                      height: "100%"
-                    }}>
-                      <h3 style={{ color: "var(--light-ocean)", fontSize: "2.2em", marginBottom: "8px" }}>
-                        {loading ? <Spinner animation="border" size="sm" /> : `${formatDistance(cyclingStats?.totalKilometers || 0)} km`}
-                      </h3>
-                      <p style={{ fontSize: "1.1em", marginBottom: "0", fontWeight: "600" }}>
-                        totalt i år
-                      </p>
-                    </div>
-                  </Col>
-                  <Col md={4} style={{ marginBottom: "20px" }}>
-                    <div style={{ 
-                      padding: "20px", 
-                      backgroundColor: "rgba(74, 144, 226, 0.1)", 
-                      borderRadius: "10px",
-                      border: "1px solid var(--light-ocean)",
-                      height: "100%"
-                    }}>
-                      <h3 style={{ color: "var(--light-ocean)", fontSize: "2.2em", marginBottom: "8px" }}>
-                        {loading ? <Spinner animation="border" size="sm" /> : `${formatDistance(cyclingStats?.longestRideKm || 0)} km`}
-                      </h3>
-                      <p style={{ fontSize: "1.1em", marginBottom: "15px", fontWeight: "600" }}>
-                        lengste tur
-                      </p>
-                      {cyclingStats?.longestRideDetails && !loading && (
-                        <div style={{ fontSize: "0.9em", color: "rgba(255, 255, 255, 0.8)" }}>
-                          <div style={{ marginBottom: "8px" }}>
-                            <strong>📅 {formatDate(cyclingStats.longestRideDetails.date)}</strong>
+          {/* Sykling statistikk */}
+          <Row style={{ justifyContent: "center", paddingTop: "50px", paddingBottom: "50px" }}>
+            <Col md={8}>
+              <h2 style={{ fontSize: "2em", paddingBottom: "20px", textAlign: "center" }}>
+                <strong className="purple">Og noen ganger sykler jeg og...</strong>
+              </h2>
+              <p>
+                Dataen er hentet direkte fra Strava.
+              </p>
+              <Card className="quote-card-view">
+                <Card.Body>
+                  <Row>
+                    <Col md={4} style={{ marginBottom: "20px" }}>
+                      <div style={{
+                        padding: "20px",
+                        backgroundColor: "rgba(74, 144, 226, 0.1)",
+                        borderRadius: "10px",
+                        border: "1px solid var(--light-ocean)",
+                        height: "100%"
+                      }}>
+                        <h3 style={{ color: "var(--light-ocean)", fontSize: "2.2em", marginBottom: "8px" }}>
+                          {loading ? <Spinner animation="border" size="sm" /> : formatRunCount(cyclingStats?.ridesThisYear || 0)}
+                        </h3>
+                        <p style={{ fontSize: "1.1em", marginBottom: "0", fontWeight: "600" }}>
+                          turer i år
+                        </p>
+                      </div>
+                    </Col>
+                    <Col md={4} style={{ marginBottom: "20px" }}>
+                      <div style={{
+                        padding: "20px",
+                        backgroundColor: "rgba(74, 144, 226, 0.1)",
+                        borderRadius: "10px",
+                        border: "1px solid var(--light-ocean)",
+                        height: "100%"
+                      }}>
+                        <h3 style={{ color: "var(--light-ocean)", fontSize: "2.2em", marginBottom: "8px" }}>
+                          {loading ? <Spinner animation="border" size="sm" /> : `${formatDistance(cyclingStats?.totalKilometers || 0)} km`}
+                        </h3>
+                        <p style={{ fontSize: "1.1em", marginBottom: "0", fontWeight: "600" }}>
+                          totalt i år
+                        </p>
+                      </div>
+                    </Col>
+                    <Col md={4} style={{ marginBottom: "20px" }}>
+                      <div style={{
+                        padding: "20px",
+                        backgroundColor: "rgba(74, 144, 226, 0.1)",
+                        borderRadius: "10px",
+                        border: "1px solid var(--light-ocean)",
+                        height: "100%"
+                      }}>
+                        <h3 style={{ color: "var(--light-ocean)", fontSize: "2.2em", marginBottom: "8px" }}>
+                          {loading ? <Spinner animation="border" size="sm" /> : `${formatDistance(cyclingStats?.longestRideKm || 0)} km`}
+                        </h3>
+                        <p style={{ fontSize: "1.1em", marginBottom: "15px", fontWeight: "600" }}>
+                          lengste tur
+                        </p>
+                        {cyclingStats?.longestRideDetails && !loading && (
+                          <div style={{ fontSize: "0.9em", color: "rgba(255, 255, 255, 0.8)" }}>
+                            <div style={{ marginBottom: "8px" }}>
+                              <strong>📅 {formatDate(cyclingStats.longestRideDetails.date)}</strong>
+                            </div>
+                            <div style={{ marginBottom: "6px" }}>
+                              🚴 {cyclingStats.longestRideDetails.avgSpeed} km/t
+                            </div>
+                            <div style={{ marginBottom: "6px" }}>
+                              ⛰️ {cyclingStats.longestRideDetails.elevationGain}m stigning
+                            </div>
+                            <div style={{
+                              fontSize: "0.8em",
+                              fontStyle: "italic",
+                              textOverflow: "ellipsis",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden"
+                            }}>
+                              "{cyclingStats.longestRideDetails.name}"
+                            </div>
                           </div>
-                          <div style={{ marginBottom: "6px" }}>
-                            🚴 {cyclingStats.longestRideDetails.avgSpeed} km/t
-                          </div>
-                          <div style={{ marginBottom: "6px" }}>
-                            ⛰️ {cyclingStats.longestRideDetails.elevationGain}m stigning
-                          </div>
-                          <div style={{ 
-                            fontSize: "0.8em", 
-                            fontStyle: "italic",
-                            textOverflow: "ellipsis",
-                            whiteSpace: "nowrap",
-                            overflow: "hidden"
-                          }}>
-                            "{cyclingStats.longestRideDetails.name}"
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </Col>
-                </Row>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
+                        )}
+                      </div>
+                    </Col>
+                  </Row>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
 
-        {/* GitHub aktivitet seksjonen */}
-        <Row style={{ justifyContent: "center", paddingTop: "50px", paddingBottom: "50px" }}>
-          <Col md={8}>
-            <h2 style={{ fontSize: "2em", paddingBottom: "20px", textAlign: "center" }}>
-              Hvor ofte jeg <strong className="purple">progger</strong>
-            </h2>
-            <Card className="quote-card-view">
-              <Card.Body>
-                <div style={{ 
-                  padding: "40px", 
-                  textAlign: "center",
-                  backgroundColor: "#0d1117",
-                  borderRadius: "10px",
-                  border: "1px solid #21262d"
-                }}>
+          {/* GitHub aktivitet seksjonen */}
+          <Row style={{ justifyContent: "center", paddingTop: "50px", paddingBottom: "50px" }}>
+            <Col md={8}>
+              <h2 style={{ fontSize: "2em", paddingBottom: "20px", textAlign: "center" }}>
+                Hvor ofte jeg <strong className="purple">progger</strong>
+              </h2>
+              <Card className="quote-card-view">
+                <Card.Body>
                   <div style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    width: "100%"
+                    padding: "40px",
+                    textAlign: "center",
+                    backgroundColor: "#0d1117",
+                    borderRadius: "10px",
+                    border: "1px solid #21262d"
                   }}>
-                    <GitHubCalendar
-                      username="vuhnger"
-                      blockSize={12}
-                      blockMargin={3}
-                      color="#39d353"
-                      fontSize={14}
-                      style={{
-                        color: '#7d8590'
-                      }}
-                    />
+                    <div style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      width: "100%"
+                    }}>
+                      <GitHubCalendar
+                        username="vuhnger"
+                        blockSize={12}
+                        blockMargin={3}
+                        color="#39d353"
+                        fontSize={14}
+                        style={{
+                          color: '#7d8590'
+                        }}
+                      />
+                    </div>
                   </div>
-                </div>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
 
-        {/* Beer Stats Section */}
-        <BeerStats />
+          {/* Beer Stats Section */}
+          <BeerStats />
 
-        {/* Spotify Stats Section */}
-        <SpotifyStats />
-        
-        {/* Forest background silhouette - positioned at bottom */}
-        <div 
-          className="forest-background"
-          style={{
-            position: "relative",
-            width: "100vw",
-            marginLeft: "calc(-50vw + 50%)",
-            height: "250px",
-            backgroundImage: `url(${spikeyWhites})`,
-            backgroundRepeat: "repeat-x",
-            backgroundPosition: "bottom center",
-            backgroundSize: "cover",
-            opacity: 0.15,
-            zIndex: 1,
-            pointerEvents: "none",
-            marginTop: "60px"
-          }}
-        />
-        
+          {/* Spotify Stats Section */}
+          <SpotifyStats />
+
+          {/* Forest background silhouette - positioned at bottom */}
+          <div
+            className="forest-background"
+            style={{
+              position: "relative",
+              width: "100vw",
+              marginLeft: "calc(-50vw + 50%)",
+              height: "250px",
+              backgroundImage: `url(${spikeyWhites})`,
+              backgroundRepeat: "repeat-x",
+              backgroundPosition: "bottom center",
+              backgroundSize: "cover",
+              opacity: 0.15,
+              zIndex: 1,
+              pointerEvents: "none",
+              marginTop: "60px"
+            }}
+          />
+
         </Container>
       </Container>
     </div>
