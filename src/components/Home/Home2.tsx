@@ -37,7 +37,7 @@ const Home2: React.FC = () => {
             <h1 style={{ fontSize: "2.6em" }}>
               Jeg heter <span className="purple"> Victor Uhnger </span>
             </h1>
-            <p className="home-about-body">
+            <div className="home-about-body">
               Jeg er 24 år gammel og tar en mastergrad i
               <i>
                 <b className="purple"> programmering og systemarkitektur</b>
@@ -76,7 +76,7 @@ const Home2: React.FC = () => {
                 </h3>
               </i>
 
-            </p>
+            </div>
           </Col>
           <Col md={4} className="myAvtar" style={{ position: "relative", zIndex: 2 }}>
             <Tilt>
@@ -86,7 +86,7 @@ const Home2: React.FC = () => {
                 alt="avatar" 
                 style={{
                   borderRadius: "20px",
-                  border: "2px solid #4A90E2",
+                  border: "2px solid var(--color-accent)",
                   padding: "5px"
                 }}
               />

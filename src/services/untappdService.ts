@@ -164,5 +164,34 @@ const defaultUntappdData: UntappdUserData = {
   beers_in_2025: 0
 };
 
-export { UntappdService, defaultUntappdData };
+// Mock data for development/demo
+const mockUntappdData: UntappdUserData = {
+  stats: {
+    total_beers: 342,
+    total_unique_beers: 289,
+    total_badges: 45,
+    total_friends: 28
+  },
+  recent_beers: [
+    {
+      beer_name: "Pilsner Urquell",
+      brewery_name: "Plzeňský Prazdroj",
+      rating_score: 4.2,
+      beer_style: "Pilsner - Czech",
+      beer_abv: 4.4,
+      created_at: new Date().toISOString()
+    }
+  ],
+  highest_rated_beer: {
+    beer_name: "Nøgne Ø Imperial Stout",
+    brewery_name: "Nøgne Ø",
+    rating_score: 4.75,
+    beer_style: "Stout - Imperial / Double",
+    beer_abv: 9.0,
+    created_at: "2024-12-01T20:00:00Z"
+  },
+  beers_in_2025: 12
+};
+
+export { UntappdService, defaultUntappdData, mockUntappdData };
 export type { UntappdUserData, UntappdBeer, UntappdStats };

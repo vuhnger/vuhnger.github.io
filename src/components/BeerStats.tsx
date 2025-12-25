@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
-import { UntappdService, defaultUntappdData, UntappdUserData } from "../services/untappdService";
+import { UntappdService, defaultUntappdData, mockUntappdData, UntappdUserData } from "../services/untappdService";
 
 const BeerStats: React.FC = () => {
   const [untappdData, setUntappdData] = useState<UntappdUserData>(defaultUntappdData);
@@ -14,7 +14,8 @@ const BeerStats: React.FC = () => {
       const USERNAME = 'vuhnger'; // Your Untappd username
       
       if (CLIENT_ID === 'YOUR_CLIENT_ID' || CLIENT_SECRET === 'YOUR_CLIENT_SECRET') {
-        console.log('Untappd API credentials not configured');
+        console.log('Untappd API credentials not configured. Using mock data.');
+        setUntappdData(mockUntappdData);
         setLoading(false);
         return;
       }
@@ -80,9 +81,6 @@ const BeerStats: React.FC = () => {
         </h1>
         <p className="section-description">
           Hva jeg har drukket i {new Date().getFullYear()}
-        </p>
-        <p className="section-description">
-          ... kommer etterhvert, hvis jeg får en API-nøkkel til Untappd. ;)
         </p>
       </Col>
 
