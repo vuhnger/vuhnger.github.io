@@ -1,0 +1,99 @@
+:root {
+  /* Modern Palette Refinements */
+  --modern-bg: #2b3a2e; /* Darker, richer forest green */
+  --modern-card-bg: rgba(255, 255, 255, 0.05);
+  --modern-glass-border: rgba(255, 255, 255, 0.1);
+  --modern-accent: #e8f5c8; /* Brighter accent */
+  --modern-text: #f0f4f0;
+  
+  /* Modern Shadows & Glows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.18);
+  --glow-accent: 0 0 20px rgba(210, 220, 182, 0.4);
+  
+  /* Transitions */
+  --ease-spring: cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* Glassmorphism Enhancements */
+.project-card-view, 
+.blog-card-view,
+.experience-card,
+.tech-icons,
+.home-about-social-links .home-social-icons {
+  background: var(--modern-card-bg) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid var(--modern-glass-border) !important;
+  box-shadow: var(--shadow-sm) !important;
+  border-radius: 16px !important;
+  transition: transform 0.3s var(--ease-spring), box-shadow 0.3s var(--ease-spring), border-color 0.3s ease !important;
+}
+
+.project-card-view:hover, 
+.blog-card-view:hover,
+.experience-card:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: var(--shadow-md), var(--glow-accent) !important;
+  border-color: var(--color-accent) !important;
+}
+
+/* Navbar Modernization */
+.sticky {
+  background: rgba(43, 58, 46, 0.85) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: var(--shadow-sm) !important;
+}
+
+/* Button Modernization */
+.btn-primary, .fork-btn-inner {
+  border-radius: 12px !important;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: 0.9rem !important;
+  padding: 10px 24px !important;
+  background: linear-gradient(135deg, var(--color-ui) 0%, var(--color-accent) 100%) !important;
+  border: none !important;
+  color: #2b3a2e !important;
+  font-weight: 700 !important;
+}
+
+.btn-primary:hover, .fork-btn-inner:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 15px rgba(210, 220, 182, 0.6) !important;
+  filter: brightness(1.1);
+}
+
+/* Typography & Layout */
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.5px; /* Tighter headings */
+}
+
+.home-about-description {
+  font-size: 1.15rem !important;
+  line-height: 1.8 !important;
+}
+
+/* Tech Icons Modernization */
+.tech-icons {
+  margin: 10px !important;
+  border-radius: 16px !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+}
+
+.tech-icons:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  transform: translateY(-5px) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+/* Avatar Polish */
+.img-fluid {
+  transition: transform 0.5s var(--ease-spring);
+}
+.img-fluid:hover {
+  transform: scale(1.02);
+}
