@@ -10,6 +10,7 @@ import {
   AiOutlineHome,
   AiOutlineFundProjectionScreen,
   AiOutlineUser,
+  AiOutlineTrophy,
 } from "react-icons/ai";
 
 import { CgFileDocument } from "react-icons/cg";
@@ -88,6 +89,19 @@ const NavBar: React.FC = () => {
                   style={{ marginBottom: "2px" }}
                 />{" "}
                 Prosjekter
+              </Nav.Link>
+            </Nav.Item>
+
+            <Nav.Item>
+              <Nav.Link
+                as={Link}
+                to="/game"
+                onClick={() => updateExpanded(false)}
+              >
+                <AiOutlineTrophy
+                  style={{ marginBottom: "2px" }}
+                />{" "}
+                Spill
               </Nav.Link>
             </Nav.Item>
 

@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import Resume from "./components/Resume/ResumeNew";
 import Thesis from "./components/Thesis/Thesis";
 import EdgeComputing from "./components/EdgeComputing/EdgeComputing";
+import SnakeGamePage from "./components/SnakeGamePage";
 import {
   BrowserRouter as Router,
   Route,
@@ -41,6 +42,7 @@ const App: React.FC = () => {
           <Route path="/project" element={<Projects />} />
           <Route path="/about" element={<About />} />
           <Route path="/resume" element={<Resume />} />
+          <Route path="/game" element={<SnakeGamePage />} />
           <Route path="/thesis" element={<Thesis />} />
           <Route path="/edge_computing" element={<EdgeComputing />} />
           <Route path="*" element={<Navigate to="/"/>} />

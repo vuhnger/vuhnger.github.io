@@ -141,7 +141,7 @@ const ResumeNew: React.FC = () => {
       {/* MST Visualization Background */}
       <MSTVisualization />
       
-      <Container fluid className="resume-section">
+      <Container fluid className="resume-section" style={{ background: "transparent" }}>
         {/* Forest background silhouette */}
         <div 
           className="forest-background"

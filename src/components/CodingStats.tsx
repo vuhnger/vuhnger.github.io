@@ -66,11 +66,11 @@ const CodingStats: React.FC = () => {
                 <Col md={6} style={{ marginBottom: "20px" }}>
                   <div style={{ 
                     padding: "20px", 
-                    backgroundColor: "rgba(74, 144, 226, 0.1)", 
+                    backgroundColor: "var(--color-grey-ui)", 
                     borderRadius: "10px",
-                    border: "1px solid var(--light-ocean)"
+                    border: "1px solid rgba(255, 255, 255, 0.1)"
                   }}>
-                    <h3 style={{ color: "var(--light-ocean)", fontSize: "2.5em", marginBottom: "10px" }}>
+                    <h3 style={{ color: "var(--color-accent)", fontSize: "2.5em", marginBottom: "10px" }}>
                       {loading ? <Spinner animation="border" size="sm" /> : `${codingStats?.hoursThisMonth || 0}t`}
                     </h3>
                     <p style={{ fontSize: "1.1em", marginBottom: "0" }}>
@@ -81,11 +81,11 @@ const CodingStats: React.FC = () => {
                 <Col md={6} style={{ marginBottom: "20px" }}>
                   <div style={{ 
                     padding: "20px", 
-                    backgroundColor: "rgba(74, 144, 226, 0.1)", 
+                    backgroundColor: "var(--color-grey-ui)", 
                     borderRadius: "10px",
-                    border: "1px solid var(--light-ocean)"
+                    border: "1px solid rgba(255, 255, 255, 0.1)"
                   }}>
-                    <h3 style={{ color: "var(--light-ocean)", fontSize: "2.2em", marginBottom: "10px" }}>
+                    <h3 style={{ color: "var(--color-accent)", fontSize: "2.2em", marginBottom: "10px" }}>
                       {loading ? <Spinner animation="border" size="sm" /> : `${codingStats?.dailyAverage || 0}t`}
                     </h3>
                     <p style={{ fontSize: "1.1em", marginBottom: "0" }}>
@@ -98,19 +98,19 @@ const CodingStats: React.FC = () => {
                 <Col md={6} style={{ marginBottom: "20px" }}>
                   <div style={{ 
                     padding: "20px", 
-                    backgroundColor: "rgba(74, 144, 226, 0.1)", 
+                    backgroundColor: "var(--color-grey-ui)", 
                     borderRadius: "10px",
-                    border: "1px solid var(--light-ocean)",
+                    border: "1px solid rgba(255, 255, 255, 0.1)",
                     height: "100%"
                   }}>
-                    <h3 style={{ color: "var(--light-ocean)", fontSize: "2.2em", marginBottom: "8px" }}>
+                    <h3 style={{ color: "var(--color-accent)", fontSize: "2.2em", marginBottom: "8px" }}>
                       {loading ? <Spinner animation="border" size="sm" /> : codingStats?.topLanguage || 'Ukjent'}
                     </h3>
                     <p style={{ fontSize: "1.1em", marginBottom: "10px", fontWeight: "600" }}>
                       mest brukte språk
                     </p>
                     {codingStats && !loading && (
-                      <div style={{ fontSize: "0.9em", color: "rgba(255, 255, 255, 0.8)" }}>
+                      <div style={{ fontSize: "0.9em", color: "var(--color-text)" }}>
                         📊 {codingStats.topLanguagePercent}% av tiden
                       </div>
                     )}
@@ -119,19 +119,19 @@ const CodingStats: React.FC = () => {
                 <Col md={6} style={{ marginBottom: "20px" }}>
                   <div style={{ 
                     padding: "20px", 
-                    backgroundColor: "rgba(74, 144, 226, 0.1)", 
+                    backgroundColor: "var(--color-grey-ui)", 
                     borderRadius: "10px",
-                    border: "1px solid var(--light-ocean)",
+                    border: "1px solid rgba(255, 255, 255, 0.1)",
                     height: "100%"
                   }}>
-                    <h3 style={{ color: "var(--light-ocean)", fontSize: "2.2em", marginBottom: "8px" }}>
+                    <h3 style={{ color: "var(--color-accent)", fontSize: "2.2em", marginBottom: "8px" }}>
                       {loading ? <Spinner animation="border" size="sm" /> : codingStats?.totalLanguages || 0}
                     </h3>
                     <p style={{ fontSize: "1.1em", marginBottom: "10px", fontWeight: "600" }}>
                       språk denne måneden
                     </p>
                     {codingStats && !loading && (
-                      <div style={{ fontSize: "0.9em", color: "rgba(255, 255, 255, 0.8)" }}>
+                      <div style={{ fontSize: "0.9em", color: "var(--color-text)" }}>
                         🖥️ Editor: {codingStats.topEditor}
                       </div>
                     )}
@@ -146,7 +146,7 @@ const CodingStats: React.FC = () => {
       {/* Programming Languages breakdown */}
       <Row style={{ justifyContent: "center", paddingTop: "30px" }}>
         <Col md={8}>
-          <h3 style={{ fontSize: "1.5em", paddingBottom: "20px", textAlign: "center", color: "white" }}>
+          <h3 style={{ fontSize: "1.5em", paddingBottom: "20px", textAlign: "center", color: "var(--color-text)" }}>
             <strong className="purple">Programmeringsspråk</strong> denne måneden
           </h3>
           <Card className="quote-card-view">
@@ -157,9 +157,9 @@ const CodingStats: React.FC = () => {
                     <Col key={language.name} md={6} lg={4} style={{ marginBottom: "20px" }}>
                       <div style={{ 
                         padding: "15px", 
-                        backgroundColor: "rgba(74, 144, 226, 0.1)", 
+                        backgroundColor: "var(--color-grey-ui)", 
                         borderRadius: "8px",
-                        border: "1px solid var(--light-ocean)",
+                        border: "1px solid rgba(255, 255, 255, 0.1)",
                         height: "100%"
                       }}>
                         <div style={{ 
@@ -169,7 +169,7 @@ const CodingStats: React.FC = () => {
                           marginBottom: "8px"
                         }}>
                           <h4 style={{ 
-                            color: "var(--light-ocean)", 
+                            color: "var(--color-accent)", 
                             fontSize: "1.3em", 
                             marginBottom: "0",
                             fontWeight: "600"
@@ -177,7 +177,7 @@ const CodingStats: React.FC = () => {
                             {language.name}
                           </h4>
                           <span style={{ 
-                            color: "var(--light-ocean)", 
+                            color: "var(--color-accent)", 
                             fontSize: "1.1em",
                             fontWeight: "bold"
                           }}>
@@ -191,7 +191,7 @@ const CodingStats: React.FC = () => {
                           marginBottom: "8px"
                         }}>
                           <div style={{ 
-                            backgroundColor: "var(--light-ocean)", 
+                            backgroundColor: "var(--color-accent)", 
                             height: "100%", 
                             borderRadius: "4px",
                             width: `${language.percent}%`,
@@ -201,7 +201,7 @@ const CodingStats: React.FC = () => {
                         <p style={{ 
                           fontSize: "0.9em", 
                           marginBottom: "0",
-                          color: "rgba(255, 255, 255, 0.8)"
+                          color: "var(--color-text)"
                         }}>
                           {language.hours}t denne måneden
                         </p>

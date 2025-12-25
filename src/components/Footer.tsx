@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
             <li className="social-icons">
               <a
                 href="https://github.com/vuhnger"
-                style={{ color: "white" }}
+                style={{ color: "var(--color-text)" }}
                 target="_blank" 
                 rel="noopener noreferrer"
               >
@@ -32,7 +32,7 @@ const Footer: React.FC = () => {
             <li className="social-icons">
               <a
                 href="https://www.linkedin.com/in/victor-uhnger/"
-                style={{ color: "white" }}
+                style={{ color: "var(--color-text)" }}
                 target="_blank" 
                 rel="noopener noreferrer"
               >
@@ -42,7 +42,7 @@ const Footer: React.FC = () => {
             <li className="social-icons">
               <a
                 href="https://www.strava.com/athletes/34349129"
-                style={{ color: "white" }}
+                style={{ color: "var(--color-text)" }}
                 target="_blank" 
                 rel="noopener noreferrer"
               >

@@ -1,24 +1,46 @@
-html {
+:root {
+  /* Botanical Earth Palette */
+  --color-bg: #778873;      /* Deep Forest - Main background */
+  --color-ui: #A1BC98;      /* Sage Green - Cards, UI elements */
+  --color-accent: #D2DCB6;  /* Beige Green - Highlights, buttons, links */
+  --color-text: #F1F3E0;    /* Matte Beige - Text */
+  --color-grey-ui: #2d3436; /* Charcoal Grey - Neutral UI elements */
+
+  /* Glassmorphism & Overlays */
+  --glass-bg: rgba(45, 52, 54, 0.6); /* Darker, neutral grey glass */
+  --glass-border: rgba(241, 243, 224, 0.1);
+  
+  /* Gradients */
   --section-background-color: linear-gradient(
     to bottom left,
-    rgba(15, 35, 68, 0.9),
-    rgba(8, 28, 58, 0.95)
+    #778873,
+    #5F6E5C
   );
 
   --image-gradient: linear-gradient(
     to bottom left,
-    rgba(15, 35, 68, 0.8),
-    rgba(8, 28, 58, 0.9)
+    rgba(119, 136, 115, 0.8),
+    rgba(95, 110, 92, 0.9)
   );
-
-  --imp-text-color: #4A90E2;
-  --ocean-blue: #1E3A5F;
-  --light-ocean: #4A90E2;
-  --deep-ocean: #0F233A;
 }
 
+html {
+  background-color: var(--color-bg);
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: "Raleway", sans-serif !important;
+}
+
+/* Text Highlights */
 .purple {
-  color: var(--imp-text-color) !important;
+  color: var(--color-accent) !important;
+}
+
+.accent-text {
+  color: var(--color-accent) !important;
 }
 
 button:focus {
@@ -35,7 +57,7 @@ button:focus {
   width: 100%;
   height: 100%;
   z-index: 999999;
-  background-color: var(--deep-ocean);
+  background-color: var(--color-bg);
   background-image: url(./Assets/vu-loading.svg);
   background-repeat: no-repeat;
   background-position: center;
@@ -51,37 +73,33 @@ button:focus {
 }
 
 /* --------- */
-/*Scrollbar   */
+/* Scrollbar */
 /* --------- */
 
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 10px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
-  background: var(--ocean-blue);
+  background: var(--color-bg);
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
-  background: var(--light-ocean);
-  border-radius: 12px;
+  background: var(--color-ui);
+  border-radius: 5px;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #6BB6FF;
-  border-radius: 12px;
+  background: var(--color-accent);
 }
 
 /* --------- */
 /* Navbar Section  */
 /* --------- */
 .sticky {
-  background-color: rgba(15, 35, 68, 0.9) !important;
+  background-color: rgba(119, 136, 115, 0.95) !important; /* Deep Forest with opacity */
   transition: all 0.3s ease-out 0s !important;
-  box-shadow: 0px 10px 10px 0px rgba(8, 28, 58, 0.3) !important;
+  box-shadow: 0px 10px 10px 0px rgba(95, 110, 92, 0.3) !important;
   backdrop-filter: blur(15px) !important;
 }
 
@@ -100,7 +118,7 @@ button:focus {
 
 .navbar-toggler span {
   display: block !important;
-  background-color: var(--light-ocean) !important;
+  background-color: var(--color-accent) !important;
   height: 4px !important;
   width: 27px !important;
   margin-top: 5px !important;
@@ -143,18 +161,18 @@ button:focus {
   opacity: 0.9 !important;
 }
 
-  @media (max-width: 767px) {
+@media (max-width: 767px) {
   .navbar {
     padding: 1rem 2rem !important;
     font-size: 1.4rem !important;
-    background-color: var(--ocean-blue) !important;
+    background-color: var(--color-bg) !important;
   }
   .navbar-nav .nav-item a::after {
     display: none !important;
   }
 }
 .navbar-brand {
-  color: rgb(250, 250, 250) !important;
+  color: var(--color-text) !important;
 }
 
 .logo {
@@ -163,7 +181,7 @@ button:focus {
 }
 
 .navbar-nav .nav-link {
-  color: white !important;
+  color: var(--color-text) !important;
   padding-right: 1rem !important;
   padding-left: 1rem !important;
 }
@@ -197,7 +215,7 @@ button:focus {
   height: 5px;
   width: 0;
   border-radius: 16px;
-  background: var(--light-ocean);
+  background: var(--color-accent);
   bottom: 1px;
   left: 0;
   z-index: -1;
@@ -212,38 +230,22 @@ button:focus {
 /* Home section */
 /* --------- */
 .wave {
-  animation-name: wave-animation; /* Refers to the name of your @keyframes element below */
-  animation-duration: 2.1s; /* Change to speed up or slow down */
-  animation-iteration-count: infinite; /* Never stop waving :) */
-  transform-origin: 70% 70%; /* Pivot around the bottom-left palm */
+  animation-name: wave-animation;
+  animation-duration: 2.1s;
+  animation-iteration-count: infinite;
+  transform-origin: 70% 70%;
   display: inline-block;
 }
 
 @keyframes wave-animation {
-  0% {
-    transform: rotate(0deg);
-  }
-  10% {
-    transform: rotate(14deg);
-  } /* The following five values can be played with to make the waving more or less extreme */
-  20% {
-    transform: rotate(-8deg);
-  }
-  30% {
-    transform: rotate(14deg);
-  }
-  40% {
-    transform: rotate(-4deg);
-  }
-  50% {
-    transform: rotate(10deg);
-  }
-  60% {
-    transform: rotate(0deg);
-  } /* Reset for the last half to pause */
-  100% {
-    transform: rotate(0deg);
-  }
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(14deg); }
+  20% { transform: rotate(-8deg); }
+  30% { transform: rotate(14deg); }
+  40% { transform: rotate(-4deg); }
+  50% { transform: rotate(10deg); }
+  60% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
 }
 
 .home-header {
@@ -253,7 +255,7 @@ button:focus {
 .home-section {
   position: relative;
   z-index: -1;
-  background: var(--section-background-color);
+  background-image: var(--section-background-color);
   background-position: top center;
   background-repeat: no-repeat;
   padding-bottom: 30px !important;
@@ -276,7 +278,7 @@ button:focus {
 
 .home-content {
   padding: 9rem 0 2rem !important;
-  color: whitesmoke;
+  color: var(--color-text);
   text-align: left;
 }
 
@@ -291,17 +293,17 @@ button:focus {
 }
 
 .main-name {
-  color: var(--light-ocean);
+  color: var(--color-accent);
 }
 
 .Typewriter__wrapper {
   font-size: 2.2em !important;
-  color: var(--light-ocean) !important;
+  color: var(--color-accent) !important;
   font-weight: 600 !important;
 }
 .Typewriter__cursor {
   font-size: 2.4em !important;
-  color: var(--light-ocean) !important;
+  color: var(--color-accent) !important;
 }
 
 @media (max-width: 767px) {
@@ -331,12 +333,12 @@ button:focus {
   position: relative;
   padding-bottom: 70px !important;
   padding-top: 70px !important;
-  background-color: var(--deep-ocean) !important;
+  background-color: var(--color-bg) !important;
   background-image: var(--section-background-color) !important;
 }
 
 .home-about-description {
-  color: white !important;
+  color: var(--color-text) !important;
   padding-top: 100px !important;
   padding-bottom: 20px !important;
   text-align: center;
@@ -351,7 +353,7 @@ button:focus {
 .home-about-social {
   text-align: center !important;
   padding-top: 25px;
-  color: white !important;
+  color: var(--color-text) !important;
 }
 
 .home-about-social-links {
@@ -370,7 +372,7 @@ button:focus {
   text-align: center !important;
   font-size: 1.2em !important;
   line-height: 2em !important;
-  background: rgba(255, 255, 255, 0.972) !important;
+  background: rgba(241, 243, 224, 0.9) !important;
   border-radius: 50% !important;
   transition: 0.5s !important;
 }
@@ -383,7 +385,7 @@ button:focus {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: var(--ocean-blue);
+  background: var(--color-ui);
   transition: 0.5s;
   transform: scale(0.9);
   z-index: -1;
@@ -391,13 +393,13 @@ button:focus {
 
 .home-social-icons:hover::before {
   transform: scale(1.1);
-  box-shadow: 0 0 15px var(--light-ocean);
+  box-shadow: 0 0 15px var(--color-accent);
 }
 
 .home-social-icons:hover {
-  color: var(--light-ocean);
-  box-shadow: 0 0 5px var(--light-ocean);
-  text-shadow: 0 0 2px var(--light-ocean);
+  color: var(--color-bg);
+  box-shadow: 0 0 5px var(--color-accent);
+  text-shadow: 0 0 2px var(--color-accent);
 }
 
 .social-icons {
@@ -407,14 +409,14 @@ button:focus {
 }
 
 .icon-colour {
-  color: var(--ocean-blue) !important;
+  color: var(--color-bg) !important;
 }
 
 /* --------- */
 /* Footer */
 /* --------- */
 .footer {
-  background-color: var(--deep-ocean);
+  background-color: var(--color-bg);
   bottom: 0 !important;
   padding-top: 10px !important;
   padding-bottom: 8px !important ;
@@ -440,7 +442,7 @@ button:focus {
 
 .footer h3 {
   font-size: 1em;
-  color: white !important;
+  color: var(--color-text) !important;
   margin-top: 0.5em !important;
   margin-bottom: 0.5em !important;
 }
@@ -451,8 +453,9 @@ button:focus {
 }
 
 .blockquote-footer {
-  color: #87CEEB !important;
+  color: var(--color-accent) !important;
 }
+
 /* --------- */
 /* Projects */
 /* --------- */
@@ -472,19 +475,19 @@ button:focus {
 }
 
 .project-card-view {
-  box-shadow: 0 4px 5px 3px rgba(74, 144, 226, 0.3) !important;
-  color: white !important;
-  background-color: transparent !important;
+  box-shadow: 0 4px 5px 3px rgba(0, 0, 0, 0.2) !important;
+  color: var(--color-text) !important;
+  background-color: var(--color-grey-ui) !important;
   opacity: 0.9 !important;
   transition: all 0.5s ease 0s !important;
   height: 100% !important;
-  border: 1px solid rgba(74, 144, 226, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 .project-card-view:hover {
   transform: scale(1.02) !important;
   overflow: hidden !important;
-  box-shadow: 0 4px 4px 5px rgba(74, 144, 226, 0.5) !important;
-  border-color: var(--light-ocean) !important;
+  box-shadow: 0 4px 4px 5px rgba(0, 0, 0, 0.3) !important;
+  border-color: var(--color-accent) !important;
 }
 
 .blog-card {
@@ -496,16 +499,16 @@ button:focus {
 }
 
 .blog-card-view {
-  background-color: transparent !important;
-  box-shadow: 0 3px 3px 2px rgba(74, 144, 226, 0.3) !important;
-  color: white !important;
+  background-color: var(--color-grey-ui) !important;
+  box-shadow: 0 3px 3px 2px rgba(0, 0, 0, 0.2) !important;
+  color: var(--color-text) !important;
   transition: all 0.5s ease 0s !important;
   height: 100% !important;
-  border: 1px solid rgba(74, 144, 226, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 .blog-link {
-  color: white !important;
+  color: var(--color-text) !important;
   text-decoration: none !important;
 }
 
@@ -516,88 +519,44 @@ button:focus {
 .blog-card-view:hover {
   transform: scale(1.02) !important;
   overflow: hidden !important;
-  box-shadow: 0 3px 3px 5px rgba(74, 144, 226, 0.5) !important;
-  border-color: var(--light-ocean) !important;
+  box-shadow: 0 3px 3px 5px rgba(0, 0, 0, 0.3) !important;
+  border-color: var(--color-accent) !important;
 }
 
 .card-img-top {
   padding: 20px !important;
-  opacity: 0.8 !important;
+  opacity: 0.9 !important;
   border-radius: 10px !important;
 }
 
 .blog-img {
   padding: 0px !important;
-  opacity: 0.8 !important;
+  opacity: 0.9 !important;
   border-radius: 0px !important;
 }
 
 .btn-primary {
-  color: #fff !important;
-  background-color: var(--light-ocean) !important;
-  border-color: var(--light-ocean) !important;
+  color: var(--color-bg) !important;
+  background-color: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
+  font-weight: 600 !important;
   transition: all 0.3s ease !important;
 }
 
 .btn-primary:hover {
-  color: #fff !important;
-  background-color: #6BB6FF !important;
-  border-color: #6BB6FF !important;
+  color: var(--color-text) !important;
+  background-color: var(--color-ui) !important;
+  border-color: var(--color-ui) !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3) !important;
+  box-shadow: 0 4px 8px rgba(161, 188, 152, 0.5) !important;
 }
 .btn:focus {
   outline: none !important;
-  box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25) !important;
+  box-shadow: 0 0 0 0.2rem rgba(210, 220, 182, 0.5) !important;
 }
 
-/* Ocean theme button variants */
-.btn-ocean {
-  color: white !important;
-  background-color: var(--ocean-blue) !important;
-  border-color: var(--ocean-blue) !important;
-  transition: all 0.3s ease !important;
-}
-
-.btn-ocean:hover {
-  color: white !important;
-  background-color: var(--light-ocean) !important;
-  border-color: var(--light-ocean) !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 4px 8px rgba(30, 58, 95, 0.3) !important;
-}
-
-.btn-light-ocean {
-  color: white !important;
-  background-color: var(--light-ocean) !important;
-  border-color: var(--light-ocean) !important;
-  transition: all 0.3s ease !important;
-}
-
-.btn-light-ocean:hover {
-  color: white !important;
-  background-color: #6BB6FF !important;
-  border-color: #6BB6FF !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 4px 8px rgba(74, 144, 226, 0.4) !important;
-}
-
-.btn-outline-ocean {
-  color: var(--light-ocean) !important;
-  border-color: var(--light-ocean) !important;
-  background-color: transparent !important;
-  transition: all 0.3s ease !important;
-}
-
-.btn-outline-ocean:hover {
-  color: white !important;
-  background-color: var(--light-ocean) !important;
-  border-color: var(--light-ocean) !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3) !important;
-}
 .project-heading {
-  color: white !important;
+  color: var(--color-text) !important;
   font-size: 2.3em !important;
   font-weight: 500 !important;
   padding-top: 10px !important;
@@ -612,7 +571,7 @@ button:focus {
   padding-top: 150px !important;
   padding-bottom: 30px !important;
   background-image: var(--section-background-color) !important;
-  color: white !important;
+  color: var(--color-text) !important;
   overflow: hidden !important;
 }
 
@@ -633,15 +592,16 @@ button:focus {
   margin: 15px !important;
   padding: 10px !important;
   opacity: 0.93 !important;
-  border: 1.7px solid var(--light-ocean) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
   vertical-align: middle !important;
   text-align: center !important;
   border-radius: 5px !important;
   display: table !important;
-  box-shadow: 4px 5px 4px 3px rgba(74, 144, 226, 0.2) !important;
+  box-shadow: 4px 5px 4px 3px rgba(0, 0, 0, 0.2) !important;
   overflow: hidden !important;
   transition: all 0.4s ease 0s !important;
-  color: var(--light-ocean) !important;
+  color: var(--color-accent) !important;
+  background-color: var(--color-grey-ui) !important;
 }
 
 @media (max-width: 767px) {
@@ -653,9 +613,10 @@ button:focus {
 .tech-icons:hover {
   transform: scale(1.05) !important;
   overflow: hidden !important;
-  border: 2.2px solid var(--light-ocean) !important;
-  box-shadow: 4px 5px 4px 3px rgba(74, 144, 226, 0.4) !important;
-  color: #6BB6FF !important;
+  border: 1px solid var(--color-accent) !important;
+  box-shadow: 4px 5px 4px 3px rgba(210, 220, 182, 0.2) !important;
+  color: var(--color-text) !important;
+  background-color: var(--color-grey-ui) !important;
 }
 .tech-icon-images {
   padding: 20px !important;
@@ -664,7 +625,7 @@ button:focus {
 
 .quote-card-view {
   border: none !important;
-  color: white !important;
+  color: var(--color-text) !important;
   background-color: transparent !important;
 }
 
@@ -688,7 +649,7 @@ button:focus {
   padding-top: 110px !important;
   padding-bottom: 30px !important;
   background-image: var(--section-background-color) !important;
-  color: white !important;
+  color: var(--color-text) !important;
 }
 
 .resume {
@@ -726,14 +687,15 @@ button:focus {
 .resume .resume-item {
   padding: 0 0 10px 25px;
   margin-top: -2px;
-  border-left: 2px solid var(--light-ocean);
+  border-left: 2px solid var(--color-accent);
   position: relative;
 }
 
 .resume .resume-item .resume-title {
   line-height: 18px;
   font-size: 0.9em;
-  background: var(--ocean-blue);
+  background: var(--color-ui);
+  color: var(--color-bg);
   padding: 8px 15px;
   display: inline-block;
   font-weight: 600;
@@ -763,8 +725,8 @@ button:focus {
   border-radius: 50px;
   left: -9px;
   top: 0;
-  background: #fff;
-  border: 2px solid var(--light-ocean);
+  background: var(--color-text);
+  border: 2px solid var(--color-accent);
 }
 
 .like-item {
@@ -774,20 +736,22 @@ button:focus {
 }
 
 .like-btn {
-  background-color: var(--ocean-blue) !important;
-  border-color: var(--ocean-blue) !important;
+  background-color: var(--color-ui) !important;
+  border-color: var(--color-ui) !important;
   padding: 0.25rem 0.98rem !important;
   border-radius: 5px !important;
   line-height: 1.4 !important;
   transition: 0.3s ease !important;
-  color: white !important;
+  color: var(--color-bg) !important;
+  font-weight: 600 !important;
 }
 
 .like-btn:hover {
   transform: translateY(-2px) !important;
-  background-color: var(--light-ocean) !important;
-  border-color: var(--light-ocean) !important;
-  box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3) !important;
+  background-color: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
+  color: var(--color-bg) !important;
+  box-shadow: 0 4px 8px rgba(161, 188, 152, 0.3) !important;
 }
 
 .animate-like {
@@ -811,21 +775,22 @@ button:focus {
 
 .fork-btn-inner {
   line-height: 1.4em !important;
-  background-color: var(--ocean-blue) !important;
-  border-color: var(--ocean-blue) !important;
+  background-color: var(--color-ui) !important;
+  border-color: var(--color-ui) !important;
   padding: 0.25rem 1.1rem !important;
   vertical-align: middle !important;
   text-align: center !important;
-  color: white !important;
+  color: var(--color-bg) !important;
+  font-weight: 600 !important;
   transition: all 0.3s ease !important;
 }
 
 .fork-btn-inner:hover {
   transform: translateY(-2px) !important;
-  background-color: var(--light-ocean) !important;
-  border-color: var(--light-ocean) !important;
-  box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3) !important;
-  color: white !important;
+  background-color: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
+  box-shadow: 0 4px 8px rgba(161, 188, 152, 0.3) !important;
+  color: var(--color-bg) !important;
 }
 .fork-btn-inner::after {
   display: none !important;
