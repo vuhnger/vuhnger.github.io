@@ -188,6 +188,7 @@ const Projects: React.FC = () => {
         </Modal>
       </Container>
     </Container>
+    </div>
   );
 };
 

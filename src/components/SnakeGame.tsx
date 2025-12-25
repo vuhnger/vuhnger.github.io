@@ -304,40 +304,48 @@ const SnakeGame: React.FC = () => {
 
   return (
     <>
-      {/* A* Toggle Button - Outside the main container to avoid pointer event issues */}
+      {/* A* Toggle Button - Repositioned to sit under navbar */}
       <div
         style={{
           position: 'fixed',
-          top: '20px',
-          right: '20px',
+          top: '80px', // Below standard navbar
+          left: '50%',
+          transform: 'translateX(-50%)',
           zIndex: 9999,
-          pointerEvents: 'all'
+          pointerEvents: 'all',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          width: '100%',
+          maxWidth: '300px'
         }}
       >
         <button
           onClick={() => setAutoPlay(!autoPlay)}
           style={{
-            padding: '10px 20px',
-            backgroundColor: autoPlay ? '#00ff41' : 'rgba(0, 0, 0, 0.7)',
+            padding: '8px 16px',
+            backgroundColor: autoPlay ? 'rgba(0, 255, 65, 0.9)' : 'rgba(20, 20, 20, 0.9)',
             color: autoPlay ? '#000' : '#00ff41',
             border: `2px solid #00ff41`,
-            borderRadius: '5px',
+            borderTop: 'none', // Make it look attached
+            borderRadius: '0 0 10px 10px',
             cursor: 'pointer',
             fontFamily: 'monospace',
-            fontSize: '14px',
+            fontSize: 'clamp(12px, 2vw, 16px)', // Responsive font size
             fontWeight: 'bold',
             transition: 'all 0.3s ease',
             textTransform: 'uppercase',
             letterSpacing: '1px',
-            filter: 'drop-shadow(0 0 5px rgba(0, 255, 65, 0.5))'
+            backdropFilter: 'blur(5px)',
+            boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+            width: 'auto',
+            minWidth: '150px'
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'scale(1.05)';
-            e.currentTarget.style.filter = 'drop-shadow(0 0 10px rgba(0, 255, 65, 0.8))';
+            e.currentTarget.style.padding = '12px 24px';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'scale(1)';
-            e.currentTarget.style.filter = 'drop-shadow(0 0 5px rgba(0, 255, 65, 0.5))';
+            e.currentTarget.style.padding = '8px 16px';
           }}
         >
           {autoPlay ? 'Auto-spill PÅ' : 'Auto-spill AV'}
