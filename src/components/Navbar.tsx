@@ -4,12 +4,9 @@ import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
-import { CgGitFork } from "react-icons/cg";
 import { BsGithub } from "react-icons/bs";
-import { ImBlog } from "react-icons/im";
 
 import {
-  AiFillStar,
   AiOutlineHome,
   AiOutlineFundProjectionScreen,
   AiOutlineUser,
@@ -43,7 +40,7 @@ const NavBar: React.FC = () => {
           <span style={{
             fontSize: "1.5rem",
             fontWeight: "bold",
-            color: "var(--light-ocean)"
+            color: "var(--color-accent)"
           }}>
             <AiOutlineHome style={{ marginBottom: "2px" }} /> Hjem
           </span>

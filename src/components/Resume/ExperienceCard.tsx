@@ -21,8 +21,8 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
   return (
     <Col md={10} className="experience-card-col" style={{ marginBottom: "30px" }}>
       <Card className="experience-card h-100" style={{
-        background: "rgba(74, 144, 226, 0.1)",
-        border: "1px solid var(--light-ocean)",
+        background: "var(--glass-bg)",
+        border: "1px solid var(--color-ui)",
         borderRadius: "10px",
         transition: "transform 0.3s ease-in-out",
         width: "100%"
@@ -71,7 +71,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
                   height: "100%",
                   fontSize: "1.5em",
                   fontWeight: "bold",
-                  color: "var(--ocean-blue)",
+                  color: "var(--color-bg)",
                   backgroundColor: "#f8f9fa",
                   borderRadius: "6px"
                 }}
@@ -85,7 +85,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
               {/* Date Range */}
               <div style={{
                 fontSize: "0.9em",
-                color: "var(--light-ocean)",
+                color: "var(--color-accent)",
                 fontWeight: "600",
                 marginBottom: "8px"
               }}>
@@ -94,7 +94,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
 
               {/* Job Title */}
               <h5 style={{
-                color: "white",
+                color: "var(--color-text)",
                 fontSize: "1.3em",
                 marginBottom: "12px",
                 fontWeight: "600"
@@ -105,7 +105,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
               {/* Company Name */}
               <div style={{
                 fontSize: "1em",
-                color: "var(--light-ocean)",
+                color: "var(--color-accent)",
                 marginBottom: "15px",
                 fontStyle: "italic"
               }}>
@@ -115,7 +115,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
               {/* Description */}
               <p style={{
                 fontSize: "0.95em",
-                color: "rgba(255, 255, 255, 0.8)",
+                color: "var(--color-text)",
                 lineHeight: "1.5",
                 marginBottom: "0"
               }}>

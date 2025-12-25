@@ -5,6 +5,8 @@ import { StravaService } from "../../services/stravaService";
 import BeerStats from "../BeerStats";
 import SpotifyStats from "../SpotifyStats";
 import AStarVisualization from "../AStarVisualization";
+import Techstack from "./Techstack";
+import Toolstack from "./Toolstack";
 import spikeyWhites from "../../Assets/forest-spiky-white.svg";
 
 interface LongestRunDetails {
@@ -150,7 +152,16 @@ const About: React.FC = () => {
             </Col>
           </Row>
 
+          <h1 className="project-heading" style={{ textAlign: "center" }}>
+            Mine <strong className="purple">Ferdigheter</strong>
+          </h1>
 
+          <Techstack />
+
+          <h1 className="project-heading" style={{ textAlign: "center" }}>
+            <strong className="purple">Verktøy</strong> jeg bruker
+          </h1>
+          <Toolstack />
 
           {/* Strava seksjonen */}
           <Row style={{ justifyContent: "center", paddingTop: "20px" }}>
@@ -191,11 +202,11 @@ const About: React.FC = () => {
                     <Col md={4} style={{ marginBottom: "20px" }}>
                       <div style={{
                         padding: "20px",
-                        backgroundColor: "rgba(74, 144, 226, 0.1)",
+                        backgroundColor: "var(--color-grey-ui)",
                         borderRadius: "10px",
-                        border: "1px solid var(--light-ocean)"
+                        border: "1px solid rgba(255, 255, 255, 0.1)"
                       }}>
-                        <h3 style={{ color: "var(--light-ocean)", fontSize: "2.5em", marginBottom: "10px" }}>
+                        <h3 style={{ color: "var(--color-accent)", fontSize: "2.5em", marginBottom: "10px" }}>
                           {loading ? <Spinner animation="border" size="sm" /> : formatRunCount(runningStats?.runsThisYear || 0)}
                         </h3>
                         <p style={{ fontSize: "1.1em", marginBottom: "0" }}>
@@ -206,11 +217,11 @@ const About: React.FC = () => {
                     <Col md={4} style={{ marginBottom: "20px" }}>
                       <div style={{
                         padding: "20px",
-                        backgroundColor: "rgba(74, 144, 226, 0.1)",
+                        backgroundColor: "var(--color-grey-ui)",
                         borderRadius: "10px",
-                        border: "1px solid var(--light-ocean)"
+                        border: "1px solid rgba(255, 255, 255, 0.1)"
                       }}>
-                        <h3 style={{ color: "var(--light-ocean)", fontSize: "2.5em", marginBottom: "10px" }}>
+                        <h3 style={{ color: "var(--color-accent)", fontSize: "2.5em", marginBottom: "10px" }}>
                           {loading ? <Spinner animation="border" size="sm" /> : `${formatDistance(runningStats?.totalKilometers || 0)} km`}
                         </h3>
                         <p style={{ fontSize: "1.1em", marginBottom: "0" }}>
@@ -221,12 +232,12 @@ const About: React.FC = () => {
                     <Col md={4} style={{ marginBottom: "20px" }}>
                       <div style={{
                         padding: "20px",
-                        backgroundColor: "rgba(74, 144, 226, 0.1)",
+                        backgroundColor: "var(--color-grey-ui)",
                         borderRadius: "10px",
-                        border: "1px solid var(--light-ocean)",
+                        border: "1px solid rgba(255, 255, 255, 0.1)",
                         height: "100%"
                       }}>
-                        <h3 style={{ color: "var(--light-ocean)", fontSize: "2.2em", marginBottom: "8px" }}>
+                        <h3 style={{ color: "var(--color-accent)", fontSize: "2.2em", marginBottom: "8px" }}>
                           {loading ? <Spinner animation="border" size="sm" /> : `${formatDistance(runningStats?.longestRunKm || 0)} km`}
                         </h3>
                         <p style={{ fontSize: "1.1em", marginBottom: "15px", fontWeight: "600" }}>
@@ -277,12 +288,12 @@ const About: React.FC = () => {
                     <Col md={4} style={{ marginBottom: "20px" }}>
                       <div style={{
                         padding: "20px",
-                        backgroundColor: "rgba(74, 144, 226, 0.1)",
+                        backgroundColor: "var(--color-grey-ui)",
                         borderRadius: "10px",
-                        border: "1px solid var(--light-ocean)",
+                        border: "1px solid rgba(255, 255, 255, 0.1)",
                         height: "100%"
                       }}>
-                        <h3 style={{ color: "var(--light-ocean)", fontSize: "2.2em", marginBottom: "8px" }}>
+                        <h3 style={{ color: "var(--color-accent)", fontSize: "2.2em", marginBottom: "8px" }}>
                           {loading ? <Spinner animation="border" size="sm" /> : formatRunCount(cyclingStats?.ridesThisYear || 0)}
                         </h3>
                         <p style={{ fontSize: "1.1em", marginBottom: "0", fontWeight: "600" }}>
@@ -293,12 +304,12 @@ const About: React.FC = () => {
                     <Col md={4} style={{ marginBottom: "20px" }}>
                       <div style={{
                         padding: "20px",
-                        backgroundColor: "rgba(74, 144, 226, 0.1)",
+                        backgroundColor: "var(--color-grey-ui)",
                         borderRadius: "10px",
-                        border: "1px solid var(--light-ocean)",
+                        border: "1px solid rgba(255, 255, 255, 0.1)",
                         height: "100%"
                       }}>
-                        <h3 style={{ color: "var(--light-ocean)", fontSize: "2.2em", marginBottom: "8px" }}>
+                        <h3 style={{ color: "var(--color-accent)", fontSize: "2.2em", marginBottom: "8px" }}>
                           {loading ? <Spinner animation="border" size="sm" /> : `${formatDistance(cyclingStats?.totalKilometers || 0)} km`}
                         </h3>
                         <p style={{ fontSize: "1.1em", marginBottom: "0", fontWeight: "600" }}>
@@ -309,12 +320,12 @@ const About: React.FC = () => {
                     <Col md={4} style={{ marginBottom: "20px" }}>
                       <div style={{
                         padding: "20px",
-                        backgroundColor: "rgba(74, 144, 226, 0.1)",
+                        backgroundColor: "var(--color-grey-ui)",
                         borderRadius: "10px",
-                        border: "1px solid var(--light-ocean)",
+                        border: "1px solid rgba(255, 255, 255, 0.1)",
                         height: "100%"
                       }}>
-                        <h3 style={{ color: "var(--light-ocean)", fontSize: "2.2em", marginBottom: "8px" }}>
+                        <h3 style={{ color: "var(--color-accent)", fontSize: "2.2em", marginBottom: "8px" }}>
                           {loading ? <Spinner animation="border" size="sm" /> : `${formatDistance(cyclingStats?.longestRideKm || 0)} km`}
                         </h3>
                         <p style={{ fontSize: "1.1em", marginBottom: "15px", fontWeight: "600" }}>
@@ -361,9 +372,9 @@ const About: React.FC = () => {
                   <div style={{
                     padding: "40px",
                     textAlign: "center",
-                    backgroundColor: "#0d1117",
+                    backgroundColor: "var(--color-grey-ui)",
                     borderRadius: "10px",
-                    border: "1px solid #21262d"
+                    border: "1px solid rgba(255, 255, 255, 0.1)"
                   }}>
                     <div style={{
                       display: "flex",
@@ -374,10 +385,10 @@ const About: React.FC = () => {
                         username="vuhnger"
                         blockSize={12}
                         blockMargin={3}
-                        color="#39d353"
+                        color="#D2DCB6"
                         fontSize={14}
                         style={{
-                          color: '#7d8590'
+                          color: 'var(--color-text)'
                         }}
                       />
                     </div>

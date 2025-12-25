@@ -4,10 +4,6 @@ import myImg from "../../Assets/avatar.png";
 import mountainsImg from "../../Assets/mountains-white.svg";
 import Tilt from "react-parallax-tilt";
 import CodingStats from "../CodingStats";
-import {
-  AiFillGithub,
-} from "react-icons/ai";
-import { FaLinkedinIn, FaStrava } from "react-icons/fa";
 
 const Home2: React.FC = () => {
   return (
